@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferretería Don Héctor</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0d0d0d;
+    --rojo: #e63329;
+    --amarillo: #f5c800;
+    --gris: #1e1e1e;
+    --gris-claro: #2e2e2e;
+    --texto: #f0ece4;
+    --texto-suave: #a0998f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--negro);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(13,13,13,0.97);
+    border-bottom: 3px solid var(--rojo);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--texto);
+    letter-spacing: 2px;
+  }
+  .logo span { color: var(--rojo); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    color: var(--texto-suave); text-decoration: none;
+    font-weight: 600; font-size: 0.85rem; letter-spacing: 1.5px;
+    text-transform: uppercase; transition: color .2s;
+  }
+  nav ul a:hover { color: var(--amarillo); }
+
+  /* HERO */
+  #inicio {
+    min-height: 100vh;
+    background: var(--gris);
+    display: flex; align-items: center;
+    padding: 80px 5% 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #inicio::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,.02) 60px, rgba(255,255,255,.02) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.02) 60px, rgba(255,255,255,.02) 61px);
+  }
+  #inicio::after {
+    content: '';
+    position: absolute; right: -100px; top: 50%; transform: translateY(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(230,51,41,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-contenido { position: relative; z-index: 1; max-width: 700px; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--rojo);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .8rem; letter-spacing: 3px; text-transform: uppercase;
+    padding: 4px 12px; margin-bottom: 1.5rem;
+  }
+  .hero-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: .9;
+    color: var(--texto);
+    margin-bottom: 1.5rem;
+  }
+  .hero-titulo .acento { color: var(--rojo); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--texto-suave);
+    line-height: 1.7; margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+  .btn-primario {
+    display: inline-block;
+    background: var(--rojo);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 14px 36px;
+    text-decoration: none;
+    transition: background .2s, transform .2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primario:hover { background: #c42820; transform: translateY(-2px); }
+  .btn-secundario {
+    display: inline-block;
+    border: 2px solid var(--texto-suave);
+    color: var(--texto);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 12px 36px;
+    text-decoration: none;
+    margin-left: 1rem;
+    transition: border-color .2s, color .2s;
+  }
+  .btn-secundario:hover { border-color: var(--amarillo); color: var(--amarillo); }
+  .hero-stats {
+    position: absolute; bottom: 60px; right: 5%;
+    display: flex; gap: 3rem;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem; color: var(--amarillo); line-height: 1;
+  }
+  .stat-label {
+    font-size: .75rem; color: var(--texto-suave);
+    text-transform: uppercase; letter-spacing: 1.5px;
+  }
+
+  /* SECCIÓN GENÉRICA */
+  section { padding: 80px 5%; }
+  .seccion-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 0.5rem;
+  }
+  .seccion-titulo .acento { color: var(--rojo); }
+  .seccion-linea {
+    width: 60px; height: 4px;
+    background: var(--rojo);
+    margin-bottom: 3rem;
+  }
+  .seccion-sub {
+    color: var(--texto-suave);
+    font-size: 1rem; margin-bottom: 3rem;
+    max-width: 600px;
+  }
+
+  /* CATEGORÍAS */
+  #productos { background: var(--negro); }
+  .grid-categorias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .categoria-card {
+    background: var(--gris);
+    border: 1px solid #333;
+    padding: 2rem 1.5rem;
+    cursor: pointer;
+    transition: border-color .2s, transform .2s;
+    text-align: center;
+  }
+  .categoria-card:hover { border-color: var(--rojo); transform: translateY(-4px); }
+  .cat-icono { font-size: 2.5rem; margin-bottom: .8rem; display: block; }
+  .cat-nombre {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .cat-qty { color: var(--texto-suave); font-size: .8rem; margin-top: .3rem; }
+
+  /* CATÁLOGO */
+  .catalogo-titulo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--texto-suave);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: .8rem;
+  }
+  .grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .producto-card {
+    background: var(--gris);
+    border: 1px solid #333;
+    overflow: hidden;
+    transition: transform .2s, border-color .2s;
+  }
+  .producto-card:hover { transform: translateY(-4px); border-color: var(--amarillo); }
+  .producto-img {
+    height: 180px;
+    background: var(--gris-claro);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .producto-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,.4));
+  }
+  .producto-badge {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--rojo); color: white;
+    font-size: .7rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 3px 8px;
+    z-index: 1;
+  }
+  .producto-info { padding: 1.2rem; }
+  .producto-nombre {
+    font-weight: 700; font-size: 1rem;
+    margin-bottom: .3rem;
+  }
+  .producto-desc {
+    color: var(--texto-suave); font-size: .85rem;
+    margin-bottom: 1rem; line-height: 1.5;
+  }
+  .producto-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .producto-precio {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; color: var(--amarillo);
+  }
+  .btn-consultar {
+    background: var(--rojo);
+    color: white;
+    border: none; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .85rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .btn-consultar:hover { background: #c42820; }
+
+  /* GALERÍA */
+  #galeria { background: var(--gris); }
+  .grid-galeria {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 200px 200px;
+    gap: 8px;
+  }
+  .galeria-item {
+    background: var(--gris-claro);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .galeria-item:first-child { grid-row: 1 / 3; font-size: 5rem; }
+  .galeria-item::after {
+    content: 'Ver';
+    position: absolute; inset: 0;
+    background: rgba(230,51,41,.7);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; letter-spacing: 3px;
+    opacity: 0; transition: opacity .3s;
+  }
+  .galeria-item:hover::after { opacity: 1; }
+
+  /* HORARIOS */
+  #horarios { background: var(--negro); }
+  .horarios-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    max-width: 800px;
+  }
+  .horario-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .8rem 0;
+    border-bottom: 1px solid #222;
+  }
+  .horario-dia {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--texto-suave);
+  }
+  .horario-hora {
+    font-weight: 600; font-size: .95rem;
+    color: var(--amarillo);
+  }
+  .horario-hora.cerrado { color: #555; }
+  .info-extra {
+    margin-top: 2rem;
+    background: var(--gris);
+    border-left: 4px solid var(--rojo);
+    padding: 1.2rem 1.5rem;
+    font-size: .9rem;
+    color: var(--texto-suave);
+    line-height: 1.7;
+  }
+
+  /* UBICACIÓN */
+  #ubicacion { background: var(--gris); }
+  .ubicacion-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: start;
+  }
+  .mapa-placeholder {
+    background: var(--gris-claro);
+    height: 320px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 1px solid #444;
+    font-size: 3rem; gap: 1rem;
+    color: var(--texto-suave);
+  }
+  .mapa-placeholder p {
+    font-size: .85rem; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .direccion-bloque h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; margin-bottom: 1.5rem;
+  }
+  .dato-contacto {
+    display: flex; gap: 1rem; align-items: flex-start;
+    margin-bottom: 1.2rem;
+  }
+  .dato-icono { font-size: 1.3rem; margin-top: .1rem; }
+  .dato-label {
+    font-size: .75rem; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--texto-suave);
+    display: block; margin-bottom: .2rem;
+  }
+  .dato-valor { font-weight: 600; font-size: .95rem; }
+
+  /* WHATSAPP FLOTANTE */
+  .whatsapp-fab {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 60px; height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,.4);
+    z-index: 200;
+    transition: transform .2s, box-shadow .2s;
+    animation: pulse-wa 2.5s infinite;
+  }
+  .whatsapp-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.6); }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,.4); }
+    50% { box-shadow: 0 4px 32px rgba(37,211,102,.7); }
+  }
+
+  /* FOOTER */
+  footer {
+    background: #080808;
+    border-top: 3px solid var(--rojo);
+    padding: 3rem 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  footer .logo { font-size: 1.5rem; }
+  .footer-copy {
+    color: var(--texto-suave);
+    font-size: .8rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .hero-stats { position: static; margin-top: 3rem; }
+    .horarios-grid { grid-template-columns: 1fr; }
+    .ubicacion-grid { grid-template-columns: 1fr; }
+    .grid-galeria { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .galeria-item:first-child { grid-column: 1/3; grid-row: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">FERRETER<span>Í</span>A<br><small style="font-size:.9rem;letter-spacing:6px;color:var(--texto-suave)">DON HÉCTOR</small></div>
+  <ul>
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#horarios">Horarios</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-contenido">
+    <div class="hero-badge">📍 San Martín, Buenos Aires</div>
+    <h1 class="hero-titulo">TODO<br>LO QUE<br>NECESI<span class="acento">TÁS</span></h1>
+    <p class="hero-sub">Herramientas, materiales y soluciones para tu obra o reparación. Atención personalizada y los mejores precios de la zona.</p>
+    <a href="#productos" class="btn-primario">Ver catálogo</a>
+    <a href="https://wa.me/5491100000000" class="btn-secundario">Consultar precio</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">+500</div><div class="stat-label">Productos</div></div>
+    <div class="stat"><div class="stat-num">25</div><div class="stat-label">Años</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Días/semana</div></div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <h2 class="seccion-titulo">CATÁLOGO DE <span class="acento">PRODUCTOS</span></h2>
+  <div class="seccion-linea"></div>
+
+  <div class="grid-categorias">
+    <div class="categoria-card"><span class="cat-icono">🔨</span><div class="cat-nombre">Herramientas</div><div class="cat-qty">+80 artículos</div></div>
+    <div class="categoria-card"><span class="cat-icono">🪚</span><div class="cat-nombre">Maderas</div><div class="cat-qty">+30 artículos</div></div>
+    <div class="categoria-card"><span class="cat-icono">🔩</span><div class="cat-nombre">Bulonería</div><div class="cat-qty">+150 artículos</div></div>
+    <div class="categoria-card"><span class="cat-icono">💡</span><div class="cat-nombre">Electricidad</div><div class="cat-qty">+60 artículos</div></div>
+    <div class="categoria-card"><span class="cat-icono">🚿</span><div class="cat-nombre">Plomería</div><div class="cat-qty">+50 artículos</div></div>
+    <div class="categoria-card"><span class="cat-icono">🎨</span><div class="cat-nombre">Pinturas</div><div class="cat-qty">+40 artículos</div></div>
+  </div>
+
+  <div class="catalogo-titulo">⭐ Productos destacados</div>
+  <div class="grid-productos">
+
+    <div class="producto-card">
+      <div class="producto-img">🔨<span class="producto-badge">Oferta</span></div>
+      <div class="producto-info">
+        <div class="producto-nombre">Martillo carpintero 500g</div>
+        <div class="producto-desc">Mango de madera reforzada, cabeza de acero forjado. Ideal para obra.</div>
+        <div class="producto-footer">
+          <div class="producto-precio">$3.500</div>
+          <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Martillo carpintero 500g" class="btn-consultar">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="producto-card">
+      <div class="producto-img">🔌</div>
+      <div class="producto-info">
+        <div class="producto-nombre">Taladro percutor 650W</div>
+        <div class="producto-desc">Doble velocidad, maletín incluido. 13mm. Para mampostería y madera.</div>
+        <div class="producto-footer">
+          <div class="producto-precio">$42.000</div>
+          <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Taladro percutor 650W" class="btn-consultar">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="producto-card">
+      <div class="producto-img">🪣<span class="producto-badge">Nuevo</span></div>
+      <div class="producto-info">
+        <div class="producto-nombre">Pintura latex interior 10L</div>
+        <div class="producto-desc">Rendimiento 12m²/litro. Acabado mate. Disponible en múltiples colores.</div>
+        <div class="producto-footer">
+          <div class="producto-precio">$18.500</div>
+          <a href="https://wa.me/5491100000000?text=Hola! Me interesa la Pintura latex interior 10L" class="btn-consultar">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="producto-card">
+      <div class="producto-img">🔧</div>
+      <div class="producto-info">
+        <div class="producto-nombre">Set llaves combinadas 9 piezas</div>
+        <div class="producto-desc">Acero cromo-vanadio. Talle 8 al 19mm. Con funda porta-llaves.</div>
+        <div class="producto-footer">
+          <div class="producto-precio">$12.800</div>
+          <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Set llaves combinadas" class="btn-consultar">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <h2 class="seccion-titulo">NUESTRO <span class="acento">LOCAL</span></h2>
+  <div class="seccion-linea"></div>
+  <div class="grid-galeria">
+    <div class="galeria-item">🏪</div>
+    <div class="galeria-item">🔧</div>
+    <div class="galeria-item">🔩</div>
+    <div class="galeria-item">🪚</div>
+    <div class="galeria-item">🎨</div>
+  </div>
+  <p style="margin-top:1rem;color:var(--texto-suave);font-size:.85rem;">📸 Reemplazá los emojis por fotos reales del local y los productos.</p>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios">
+  <h2 class="seccion-titulo">HORARIOS DE <span class="acento">ATENCIÓN</span></h2>
+  <div class="seccion-linea"></div>
+  <div class="horarios-grid">
+    <div>
+      <div class="horario-item"><span class="horario-dia">Lunes</span><span class="horario-hora">8:00 — 18:00</span></div>
+      <div class="horario-item"><span class="horario-dia">Martes</span><span class="horario-hora">8:00 — 18:00</span></div>
+      <div class="horario-item"><span class="horario-dia">Miércoles</span><span class="horario-hora">8:00 — 18:00</span></div>
+      <div class="horario-item"><span class="horario-dia">Jueves</span><span class="horario-hora">8:00 — 18:00</span></div>
+    </div>
+    <div>
+      <div class="horario-item"><span class="horario-dia">Viernes</span><span class="horario-hora">8:00 — 18:00</span></div>
+      <div class="horario-item"><span class="horario-dia">Sábado</span><span class="horario-hora">8:00 — 13:00</span></div>
+      <div class="horario-item"><span class="horario-dia">Domingo</span><span class="horario-hora cerrado">Cerrado</span></div>
+    </div>
+  </div>
+  <div class="info-extra">
+    ⚡ Entregas a domicilio disponibles de lunes a viernes. Consultanos por WhatsApp para pedidos especiales o fuera de horario.
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion">
+  <h2 class="seccion-titulo">CÓMO <span class="acento">LLEGAR</span></h2>
+  <div class="seccion-linea"></div>
+  <div class="ubicacion-grid">
+    <div>
+      <div class="mapa-placeholder">
+        🗺️
+        <p>Mapa — insertar Google Maps</p>
+      </div>
+    </div>
+    <div class="direccion-bloque">
+      <h3>Encontranos aquí</h3>
+      <div class="dato-contacto">
+        <span class="dato-icono">📍</span>
+        <div><span class="dato-label">Dirección</span><span class="dato-valor">Av. Hipólito Yrigoyen 1234<br>San Martín, Buenos Aires</span></div>
+      </div>
+      <div class="dato-contacto">
+        <span class="dato-icono">📞</span>
+        <div><span class="dato-label">Teléfono</span><span class="dato-valor">011 4XXX-XXXX</span></div>
+      </div>
+      <div class="dato-contacto">
+        <span class="dato-icono">💬</span>
+        <div><span class="dato-label">WhatsApp</span><span class="dato-valor">11 XXXX-XXXX</span></div>
+      </div>
+      <div class="dato-contacto">
+        <span class="dato-icono">📧</span>
+        <div><span class="dato-label">Email</span><span class="dato-valor">ferreteria@email.com</span></div>
+      </div>
+      <a href="https://wa.me/5491100000000" class="btn-primario" style="margin-top:1.5rem;display:inline-block">💬 Escribinos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">FERRETER<span style="color:var(--rojo)">Í</span>A DON HÉCTOR</div>
+  <div class="footer-copy">© 2025 Ferretería Don Héctor · Todos los derechos reservados</div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/5491100000000" class="whatsapp-fab" target="_blank" title="Consultanos por WhatsApp">💬</a>
+
+</body>
+</html>
