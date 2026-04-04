@@ -24,7 +24,8 @@ section > * {
 }
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth;
+  overflow-x: hidden; }
 
   body {
     font-family: 'Barlow', sans-serif;
@@ -44,7 +45,7 @@ section > * {
   }
 
   nav { padding: 0 8%; }
-  
+
   .logo {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2rem;
@@ -404,8 +405,9 @@ section > * {
   }
 
   .hero-h1 {
-    font-size: clamp(2.2rem, 11vw, 4rem);
-    letter-spacing: -1px;
+    font-size: clamp(1.8rem, 9vw, 3rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .hero-desc {
