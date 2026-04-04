@@ -237,6 +237,16 @@ section > * {
     position: relative;
     cursor: pointer;
   }
+
+  
+  .gal-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
   .gal-item.tall { grid-row: 1 / 3; font-size: 6rem; }
   .gal-item::after {
     content: '';
@@ -359,7 +369,19 @@ section > * {
 
   /* HERO */
   #inicio {
+    grid-template-columns: 1fr;
     padding: 90px 6% 60px;
+    min-height: auto;
+  }
+
+  .hero-der {
+    justify-content: flex-start;
+    margin-top: 2.5rem;
+  }
+
+  .hero-visual {
+    width: 100%;
+    height: 260px;
   }
 
   .hero-desc {
@@ -408,7 +430,7 @@ section > * {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--texto);
+  background: var(--crema);
   transition: all .3s;
 }
 .hamburguesa.abierto span:nth-child(1) {
