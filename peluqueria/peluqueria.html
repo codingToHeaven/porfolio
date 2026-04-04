@@ -139,6 +139,15 @@ section > * {
     position: relative;
     overflow: hidden;
   }
+  .hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
   .hero-visual::before {
     content: '';
     position: absolute; top: -30px; right: -30px;
@@ -202,6 +211,7 @@ section > * {
     margin-bottom: 1rem;
   }
   .serv-icono { font-size: 1.8rem; margin-bottom: .8rem; display: block; }
+  .serv-icono img { width: 100%; max-width: 150px; height: auto; object-fit: contain; display: block; }
   .serv-nombre {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem; font-weight: 600;
@@ -506,7 +516,7 @@ section > * {
   </div>
   <div class="hero-der">
     <div class="hero-visual">
-      ✂️
+      <img src="./imagenes/logo_estudio_valentina.png" alt="logo">
       <div class="hero-tag">+8 años de experiencia</div>
     </div>
   </div>
@@ -519,42 +529,42 @@ section > * {
   <div class="grid-servicios">
     <div class="servicio-card">
       <div class="serv-num">01</div>
-      <span class="serv-icono">✂️</span>
+      <span class="serv-icono"><img src="./imagenes/Corte.png" alt="Corte"></span>
       <div class="serv-nombre">Corte & Peinado</div>
       <div class="serv-desc">Corte personalizado según tu tipo de cabello y estilo de vida. Incluye lavado y peinado final.</div>
       <div class="serv-precio">Desde $4.500</div>
     </div>
     <div class="servicio-card">
       <div class="serv-num">02</div>
-      <span class="serv-icono">🎨</span>
+      <span class="serv-icono"><img src="./imagenes/color.png" alt=""></span>
       <div class="serv-nombre">Coloración</div>
       <div class="serv-desc">Tintes, mechas, balayage y técnicas de color para transformar y realzar tu look.</div>
       <div class="serv-precio">Desde $8.000</div>
     </div>
     <div class="servicio-card">
       <div class="serv-num">03</div>
-      <span class="serv-icono">💆</span>
+      <span class="serv-icono"><img src="./imagenes/crema.png" alt="crema"></span>
       <div class="serv-nombre">Tratamientos</div>
       <div class="serv-desc">Hidratación profunda, keratina, botox capilar y reconstrucción para cabello dañado.</div>
       <div class="serv-precio">Desde $6.500</div>
     </div>
     <div class="servicio-card">
       <div class="serv-num">04</div>
-      <span class="serv-icono">💅</span>
+      <span class="serv-icono"><img src="./imagenes/manicura.png" alt="manicura"></span>
       <div class="serv-nombre">Manicuría</div>
       <div class="serv-desc">Manicuría clásica, semipermanente y nail art. Cuidado completo de manos y uñas.</div>
       <div class="serv-precio">Desde $3.500</div>
     </div>
     <div class="servicio-card">
       <div class="serv-num">05</div>
-      <span class="serv-icono">🪮</span>
+      <span class="serv-icono"><img src="./imagenes/alisado.png" alt="alisado"></span>
       <div class="serv-nombre">Alisado & Rulos</div>
       <div class="serv-desc">Alisado progresivo permanente y permanente de rulos para definir tu estilo duraderamente.</div>
       <div class="serv-precio">Desde $12.000</div>
     </div>
     <div class="servicio-card">
       <div class="serv-num">06</div>
-      <span class="serv-icono">👰</span>
+      <span class="serv-icono"><img src="./imagenes/peinado_especial.png" alt="peinado especial"></span>
       <div class="serv-nombre">Peinados especiales</div>
       <div class="serv-desc">Novias, quince años y eventos. Recogidos, trenzas y peinados de ocasión con prueba previa.</div>
       <div class="serv-precio">Desde $9.000</div>
@@ -572,11 +582,11 @@ section > * {
     <a href="https://wa.me/5491100000000" class="btn-outline">Ver más trabajos</a>
   </div>
   <div class="grid-galeria-pelu">
-    <div class="gal-item">💇‍♀️</div>
-    <div class="gal-item tall">✨</div>
-    <div class="gal-item">🎨</div>
-    <div class="gal-item">💅</div>
-    <div class="gal-item">👰</div>
+    <div class="gal-item"><img src="./imagenes/Corte.png" alt="corte"></div>
+    <div class="gal-item tall"><img src="./imagenes/color.png" alt="color"></div>
+    <div class="gal-item"><img src="./imagenes/crema.png" alt="crema"></div>
+    <div class="gal-item"><img src="./imagenes/manicura.png" alt="manicura"></div>
+    <div class="gal-item"><img src="./imagenes/peinado_especial.png" alt="peinado especial"></div>
   </div>
 </section>
 

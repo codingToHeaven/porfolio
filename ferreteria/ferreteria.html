@@ -181,7 +181,7 @@ section > * {
   }
   .categoria-card:hover { border-color: var(--rojo); transform: translateY(-4px); }
   .cat-icono { font-size: 2.5rem; margin-bottom: .8rem; display: block; }
-  .cat-icono img { width: 12rem; height: 12rem; object-fit: contain; display: block; margin: 0 auto; }
+  .cat-icono img { width: 100%; max-width: 12rem; height: 12rem; object-fit: contain; display: block; margin: 0 auto; }
   .cat-nombre {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 1.1rem; font-weight: 700;
@@ -268,6 +268,7 @@ section > * {
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 200px 200px;
     gap: 8px;
+    width: 100%;
   }
   .galeria-item {
     background: var(--gris-claro);
