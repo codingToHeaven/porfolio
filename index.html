@@ -18,6 +18,12 @@
     --blanco: #ffffff;
   }
 
+  /* Contenedor máximo para todo el contenido */
+section > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
@@ -38,6 +44,8 @@
     border-bottom: 1px solid var(--borde);
     backdrop-filter: blur(16px);
   }
+  nav { padding: 0 8%; }
+  
   .nav-logo {
     display: flex; align-items: center; gap: .7rem;
     text-decoration: none;
@@ -214,10 +222,10 @@
   }
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-  }
+  
 
   /* SECCIONES */
-  section { padding: 90px 5%; }
+  section { padding: 80px 8%; }
   .sec-label {
     font-size: .72rem; letter-spacing: 3px; text-transform: uppercase;
     color: var(--verde); margin-bottom: 1rem;
@@ -532,14 +540,57 @@
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    nav ul { display: none; }
-    #inicio { grid-template-columns: 1fr; }
-    .hero-logo-wrap { display: none; }
-    .valor-strip { grid-template-columns: 1fr 1fr; }
-    .contacto-wrap { grid-template-columns: 1fr; }
-    .plan-mante { flex-direction: column; }
-    .mante-precio { text-align: left; }
+  /* PADDING GENERAL */
+  section {
+    padding: 70px 6% !important;
   }
+
+  nav {
+    padding: 0 6%;
+  }
+
+  /* HERO */
+  #inicio {
+    padding: 90px 6% 60px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(2.2rem, 11vw, 4rem);
+    letter-spacing: -1px;
+  }
+
+  .hero-desc {
+    font-size: .95rem;
+  }
+
+  .hero-acciones {
+    flex-direction: column;
+  }
+
+  .btn-azul, .btn-ghost {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* STATS */
+  .hero-chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  /* NAV */
+  nav ul { display: none; }
+
+  /* GRIDS */
+  .grid-servicios-el { grid-template-columns: 1fr; }
+  .grid-trabajos { grid-template-columns: 1fr 1fr; }
+  .trab-item { height: 160px; }
+  .trab-item.wide { grid-column: 1/3; height: 200px; }
+  .horarios-box { grid-template-columns: 1fr; }
+  .ubic-layout { grid-template-columns: 1fr; }
+}
   @media (max-width: 480px) {
     .valor-strip { grid-template-columns: 1fr; }
   }
@@ -557,7 +608,7 @@
     <li><a href="#demos">Demos</a></li>
     <li><a href="#planes">Planes</a></li>
     <li><a href="#contacto">Contacto</a></li>
-    <li><a href="https://wa.me/5491100000000" class="nav-btn">Consultar</a></li>
+    <li><a href="https://wa.me/5491150613167" class="nav-btn">Consultar</a></li>
   </ul>
 </nav>
 
@@ -566,7 +617,7 @@
   <div class="hero-noise"></div>
   <div class="hero-glow"></div>
   <div class="hero-contenido">
-    <div class="hero-chip"><span class="chip-dot"></span>Páginas web para negocios locales</div>
+    <div class="hero-chip"><span class="chip-dot"></span>Páginas web - Diseño y Mantenimiento</div>
     <h1 class="hero-h1">
       Tu negocio<br>
       <span class="verde">en internet</span><br>
@@ -660,7 +711,7 @@
       <div class="sec-label">Precios claros</div>
       <h2 class="sec-h2" style="margin-bottom:0">Elegí tu <span>plan</span></h2>
     </div>
-    <a href="https://wa.me/5491100000000?text=Hola! Quiero consultar sobre los planes de página web" class="btn-verde">Consultar por WhatsApp</a>
+    <a href="https://wa.me/5491150613167?text=Hola! Quiero consultar sobre los planes de página web" class="btn-verde">Consultar por WhatsApp</a>
   </div>
 
   <div class="grid-planes">
@@ -681,7 +732,7 @@
         <li>Galería de fotos</li>
         <li>Diseño responsive (celular)</li>
       </ul>
-      <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Plan Básico" class="plan-cta">Consultar</a>
+      <a href="https://wa.me/5491150613167?text=Hola! Me interesa el Plan Básico" class="plan-cta">Consultar</a>
     </div>
 
     <div class="plan-card destacado">
@@ -700,7 +751,7 @@
         <li>Optimización básica para Google</li>
         <li>Conexión con redes sociales</li>
       </ul>
-      <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Plan Comercial" class="plan-cta">Consultar</a>
+      <a href="https://wa.me/5491150613167?text=Hola! Me interesa el Plan Comercial" class="plan-cta">Consultar</a>
     </div>
 
     <div class="plan-card">
@@ -718,7 +769,7 @@
         <li>WhatsApp automático integrado</li>
         <li>Dominio incluido 1 año</li>
       </ul>
-      <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Plan Avanzado" class="plan-cta">Consultar</a>
+      <a href="https://wa.me/5491150613167?text=Hola! Me interesa el Plan Avanzado" class="plan-cta">Consultar</a>
     </div>
 
   </div>
@@ -739,10 +790,10 @@
     </div>
     <div>
       <div class="mante-precio">
-        $8.000 – $15.000
+        $12.000 – $25.000
         <small>por mes · se suma al plan elegido</small>
       </div>
-      <a href="https://wa.me/5491100000000?text=Hola! Me interesa el plan de mantenimiento" class="btn-verde" style="display:inline-block;margin-top:1.2rem;font-size:.85rem;padding:12px 24px">Consultar</a>
+      <a href="https://wa.me/5491150613167?text=Hola! Me interesa el plan de mantenimiento" class="btn-verde" style="display:inline-block;margin-top:1.2rem;font-size:.85rem;padding:12px 24px">Consultar</a>
     </div>
   </div>
 
@@ -756,13 +807,13 @@
       <h2 class="sec-h2">¿Querés tu<br><span>página web?</span></h2>
       <p>Contanos de tu negocio y te respondemos con un presupuesto en el día. Sin vueltas.</p>
       <div class="contacto-links">
-        <a href="https://wa.me/5491100000000" class="cto-link">
+        <a href="https://wa.me/5491150613167" class="cto-link">
           <span class="cto-link-icono">💬</span>
-          <div><span class="cto-link-key">WhatsApp</span><span class="cto-link-val">11 XXXX-XXXX</span></div>
+          <div><span class="cto-link-key">WhatsApp</span><span class="cto-link-val">11 50613167</span></div>
         </a>
         <a href="mailto:info@codingtoheaven.com" class="cto-link">
           <span class="cto-link-icono">📧</span>
-          <div><span class="cto-link-key">Email</span><span class="cto-link-val">info@codingtoheaven.com</span></div>
+          <div><span class="cto-link-key">Email</span><span class="cto-link-val">codingtoheaven@gmail.com</span></div>
         </a>
         <a href="https://instagram.com/codingtoheaven" class="cto-link">
           <span class="cto-link-icono">📸</span>
@@ -809,7 +860,7 @@
 </footer>
 
 <!-- WA FAB -->
-<a href="https://wa.me/5491100000000" class="wa-fab" target="_blank" title="Consultanos por WhatsApp">💬</a>
+<a href="https://wa.me/5491150613167" class="wa-fab" target="_blank" title="Consultanos por WhatsApp">💬</a>
 
 <script>
 function enviarWA() {
@@ -824,7 +875,7 @@ function enviarWA() {
   }
 
   const texto = `Hola! Quiero consultar sobre una página web.\n\n👤 Nombre: ${nombre}\n🏪 Negocio: ${negocio}\n📋 Plan: ${plan || 'Sin definir'}\n💬 Mensaje: ${mensaje || 'Sin mensaje adicional'}`;
-  window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(texto)}`, '_blank');
+  window.open(`https://wa.me/5491150613167?text=${encodeURIComponent(texto)}`, '_blank');
 }
 </script>
 
