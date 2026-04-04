@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodingToHeaven — Páginas web para tu negocio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #080809;
+    --gris: #111114;
+    --gris-card: #18181d;
+    --verde: #00ff87;
+    --verde-suave: rgba(0,255,135,.1);
+    --borde: rgba(255,255,255,.07);
+    --texto: #f0f0f5;
+    --texto-suave: #7a7a8c;
+    --blanco: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Epilogue', sans-serif;
+    background: var(--negro);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 0 5%;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(8,8,9,.92);
+    border-bottom: 1px solid var(--borde);
+    backdrop-filter: blur(16px);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: .7rem;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .nav-logo-texto {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--blanco);
+  }
+  .nav-logo-texto span { color: var(--verde); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+  nav ul a {
+    color: var(--texto-suave); text-decoration: none;
+    font-size: .82rem; font-weight: 500;
+    letter-spacing: .5px; transition: color .2s;
+  }
+  nav ul a:hover { color: var(--texto); }
+  .nav-btn {
+    background: var(--verde) !important;
+    color: var(--negro) !important;
+    font-weight: 700 !important;
+    padding: 8px 20px;
+    transition: opacity .2s !important;
+  }
+  .nav-btn:hover { opacity: .85; }
+
+  /* HERO */
+  #inicio {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 4rem;
+    padding: 100px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-noise {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: .4;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,255,135,.07) 0%, transparent 65%);
+    top: 50%; left: 50%; transform: translate(-50%, -60%);
+    pointer-events: none;
+  }
+  .hero-contenido { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; text-align: center; }
+
+  .hero-chip {
+    display: inline-flex; align-items: center; gap: .5rem;
+    border: 1px solid rgba(0,255,135,.3);
+    color: var(--verde);
+    font-size: .75rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 16px; margin-bottom: 2.5rem;
+    animation: fadeDown .6s ease both;
+  }
+  .chip-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--verde);
+    animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+  .hero-h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: .95;
+    letter-spacing: -3px;
+    margin-bottom: 2rem;
+    animation: fadeDown .7s .1s ease both;
+  }
+  .hero-h1 .verde { color: var(--verde); }
+  .hero-h1 .outline {
+    -webkit-text-stroke: 2px rgba(255,255,255,.25);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--texto-suave);
+    line-height: 1.8; max-width: 580px;
+    margin: 0 auto 3rem;
+    animation: fadeDown .7s .2s ease both;
+  }
+
+  .hero-botones {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeDown .7s .3s ease both;
+  }
+  .btn-verde {
+    display: inline-block;
+    background: var(--verde);
+    color: var(--negro);
+    font-family: 'Epilogue', sans-serif;
+    font-size: .9rem; font-weight: 700;
+    padding: 15px 32px;
+    text-decoration: none;
+    transition: opacity .2s, transform .2s;
+  }
+  .btn-verde:hover { opacity: .88; transform: translateY(-2px); }
+  .btn-borde {
+    display: inline-block;
+    border: 1px solid var(--borde);
+    color: var(--texto);
+    font-size: .9rem; font-weight: 500;
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: border-color .2s;
+  }
+  .btn-borde:hover { border-color: rgba(255,255,255,.3); }
+
+  /* PROPUESTA DE VALOR */
+  .valor-strip {
+    border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+    padding: 3rem 5%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--borde);
+    animation: fadeDown .7s .4s ease both;
+  }
+  .valor-item {
+    background: var(--negro);
+    padding: 2rem 2.5rem;
+    display: flex; flex-direction: column; gap: .6rem;
+  }
+  .valor-icono { font-size: 1.8rem; }
+  .valor-titulo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+  }
+  .valor-desc { color: var(--texto-suave); font-size: .85rem; line-height: 1.6; }
+
+  .hero-logo-wrap {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-logo-wrap img {
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow:
+      0 0 0 1px rgba(0,255,135,.15),
+      0 0 60px rgba(0,255,135,.08),
+      0 0 120px rgba(0,255,135,.04);
+    animation: logo-float 4s ease-in-out infinite;
+  }
+  @keyframes logo-float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-logo-ring {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,255,135,.12);
+    animation: logo-float 4s ease-in-out infinite reverse;
+  }
+  .hero-logo-ring2 {
+    position: absolute;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0,255,135,.06);
+  }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECCIONES */
+  section { padding: 90px 5%; }
+  .sec-label {
+    font-size: .72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--verde); margin-bottom: 1rem;
+  }
+  .sec-h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900; letter-spacing: -1.5px;
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .sec-h2 span { color: var(--verde); }
+  .sec-sub {
+    color: var(--texto-suave); font-size: 1rem;
+    line-height: 1.7; max-width: 520px; margin-bottom: 4rem;
+  }
+
+  /* DEMOS */
+  #demos { background: var(--gris); }
+  .grid-demos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .demo-card {
+    background: var(--gris-card);
+    border: 1px solid var(--borde);
+    overflow: hidden;
+    transition: border-color .3s, transform .2s;
+  }
+  .demo-card:hover { border-color: var(--verde); transform: translateY(-4px); }
+  .demo-preview {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative;
+  }
+  .demo-preview.ferreteria { background: linear-gradient(135deg, #1e1e1e, #2e1a1a); }
+  .demo-preview.peluqueria { background: linear-gradient(135deg, #1a1714, #2d2520); }
+  .demo-preview.electricista { background: linear-gradient(135deg, #080c18, #0d1830); }
+  .demo-tag {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--verde);
+    color: var(--negro);
+    font-size: .68rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 3px 10px;
+  }
+  .demo-info { padding: 1.5rem; }
+  .demo-rubro {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 800;
+    margin-bottom: .5rem;
+  }
+  .demo-desc {
+    color: var(--texto-suave); font-size: .85rem;
+    line-height: 1.6; margin-bottom: 1.2rem;
+  }
+  .demo-link {
+    display: inline-flex; align-items: center; gap: .4rem;
+    color: var(--verde); font-size: .82rem; font-weight: 600;
+    text-decoration: none; letter-spacing: .5px;
+    transition: gap .2s;
+  }
+  .demo-link:hover { gap: .8rem; }
+
+  /* PLANES */
+  #planes { background: var(--negro); }
+  .planes-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .grid-planes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .plan-card {
+    background: var(--gris-card);
+    border: 1px solid var(--borde);
+    padding: 2rem;
+    position: relative;
+    transition: border-color .3s, transform .2s;
+    display: flex; flex-direction: column;
+  }
+  .plan-card:hover { border-color: rgba(0,255,135,.3); transform: translateY(-4px); }
+  .plan-card.destacado {
+    border-color: var(--verde);
+    background: rgba(0,255,135,.04);
+  }
+  .plan-badge {
+    position: absolute; top: -12px; left: 2rem;
+    background: var(--verde);
+    color: var(--negro);
+    font-size: .68rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 3px 12px;
+  }
+  .plan-num {
+    font-family: 'Syne', sans-serif;
+    font-size: .75rem; font-weight: 700;
+    color: var(--verde); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: .8rem;
+  }
+  .plan-nombre {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 900;
+    margin-bottom: .5rem;
+  }
+  .plan-desc {
+    color: var(--texto-suave); font-size: .82rem;
+    margin-bottom: 1.5rem; line-height: 1.6;
+  }
+  .plan-precio {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--blanco); margin-bottom: .3rem;
+    line-height: 1;
+  }
+  .plan-precio.rango { font-size: 1.4rem; }
+  .plan-tiempo {
+    font-size: .75rem; color: var(--texto-suave);
+    margin-bottom: 1.8rem; letter-spacing: .5px;
+  }
+  .plan-divider {
+    height: 1px; background: var(--borde);
+    margin-bottom: 1.5rem;
+  }
+  .plan-lista {
+    list-style: none; display: flex; flex-direction: column;
+    gap: .7rem; flex: 1;
+  }
+  .plan-lista li {
+    font-size: .85rem; color: var(--texto-suave);
+    display: flex; gap: .6rem; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .plan-lista li::before {
+    content: '✓';
+    color: var(--verde); font-weight: 700;
+    flex-shrink: 0; margin-top: .05rem;
+  }
+  .plan-cta {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    padding: 12px;
+    border: 1px solid var(--borde);
+    color: var(--texto);
+    font-size: .85rem; font-weight: 600;
+    text-decoration: none;
+    transition: border-color .2s, color .2s;
+  }
+  .plan-cta:hover { border-color: var(--verde); color: var(--verde); }
+  .plan-card.destacado .plan-cta {
+    background: var(--verde);
+    color: var(--negro);
+    border-color: var(--verde);
+  }
+  .plan-card.destacado .plan-cta:hover { opacity: .88; }
+
+  /* PLAN MANTENIMIENTO */
+  .plan-mante {
+    margin-top: 1.5rem;
+    background: var(--gris-card);
+    border: 1px solid var(--borde);
+    padding: 2rem 2.5rem;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .mante-izq { flex: 1; min-width: 200px; }
+  .mante-num {
+    font-size: .72rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--verde); margin-bottom: .5rem;
+  }
+  .mante-nombre {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 900; margin-bottom: .4rem;
+  }
+  .mante-desc { color: var(--texto-suave); font-size: .85rem; line-height: 1.6; }
+  .mante-precio {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem; font-weight: 900;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .mante-precio small {
+    display: block; font-size: .75rem; font-family: 'Epilogue', sans-serif;
+    font-weight: 400; color: var(--texto-suave); margin-top: .2rem;
+  }
+  .mante-lista {
+    list-style: none; display: flex; flex-wrap: wrap; gap: .5rem;
+    margin-top: 1rem;
+  }
+  .mante-lista li {
+    background: rgba(0,255,135,.08);
+    border: 1px solid rgba(0,255,135,.15);
+    color: var(--verde);
+    font-size: .75rem; padding: 3px 10px;
+  }
+
+  /* CONTACTO */
+  #contacto { background: var(--gris); }
+  .contacto-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .contacto-izq .sec-h2 { margin-bottom: .8rem; }
+  .contacto-izq p {
+    color: var(--texto-suave); font-size: 1rem;
+    line-height: 1.8; margin-bottom: 2.5rem;
+  }
+  .contacto-links { display: flex; flex-direction: column; gap: 1rem; }
+  .cto-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--gris-card);
+    border: 1px solid var(--borde);
+    text-decoration: none; color: var(--texto);
+    transition: border-color .2s;
+  }
+  .cto-link:hover { border-color: var(--verde); }
+  .cto-link-icono { font-size: 1.4rem; }
+  .cto-link-key {
+    font-size: .7rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--texto-suave); display: block; margin-bottom: .1rem;
+  }
+  .cto-link-val { font-weight: 600; font-size: .95rem; }
+  .contacto-der {
+    background: var(--gris-card);
+    border: 1px solid var(--borde);
+    padding: 2.5rem;
+  }
+  .contacto-der h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 900;
+    margin-bottom: 1.5rem;
+  }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block; font-size: .75rem; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--texto-suave);
+    margin-bottom: .5rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--negro);
+    border: 1px solid var(--borde);
+    color: var(--texto);
+    font-family: 'Epilogue', sans-serif;
+    font-size: .9rem;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color .2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--verde); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .btn-form {
+    width: 100%;
+    background: var(--verde);
+    color: var(--negro);
+    font-family: 'Epilogue', sans-serif;
+    font-size: .9rem; font-weight: 700;
+    padding: 14px;
+    border: none; cursor: pointer;
+    transition: opacity .2s;
+  }
+  .btn-form:hover { opacity: .88; }
+
+  /* WA FAB */
+  .wa-fab {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 58px; height: 58px;
+    background: #25d366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.7rem; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,.4);
+    z-index: 200; transition: transform .2s;
+    animation: wa-p 2.5s infinite;
+  }
+  .wa-fab:hover { transform: scale(1.1); }
+  @keyframes wa-p {
+    0%,100%{ box-shadow: 0 4px 20px rgba(37,211,102,.4) }
+    50%{ box-shadow: 0 4px 36px rgba(37,211,102,.65) }
+  }
+
+  /* FOOTER */
+  footer {
+    background: #050506;
+    border-top: 1px solid var(--borde);
+    padding: 3rem 5%;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    display: flex; align-items: center; gap: .7rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 900;
+    color: var(--blanco);
+  }
+  .footer-logo img {
+    width: 34px; height: 34px;
+    border-radius: 50%; object-fit: cover;
+  }
+  .footer-logo span { color: var(--verde); }
+  .footer-copy { color: var(--texto-suave); font-size: .78rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    #inicio { grid-template-columns: 1fr; }
+    .hero-logo-wrap { display: none; }
+    .valor-strip { grid-template-columns: 1fr 1fr; }
+    .contacto-wrap { grid-template-columns: 1fr; }
+    .plan-mante { flex-direction: column; }
+    .mante-precio { text-align: left; }
+  }
+  @media (max-width: 480px) {
+    .valor-strip { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">
+    <img src="./imagenes/logo_coToHevn.png" alt="CodingToHeaven">
+    <span class="nav-logo-texto">Coding<span>ToHeaven</span></span>
+  </a>
+  <ul>
+    <li><a href="#demos">Demos</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="https://wa.me/5491100000000" class="nav-btn">Consultar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-noise"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-contenido">
+    <div class="hero-chip"><span class="chip-dot"></span>Páginas web para negocios locales</div>
+    <h1 class="hero-h1">
+      Tu negocio<br>
+      <span class="verde">en internet</span><br>
+      <span class="outline">hoy mismo.</span>
+    </h1>
+    <p class="hero-sub">Diseñamos páginas web para que tus clientes te encuentren en Google, te contacten por WhatsApp y vean tus productos desde el celular.</p>
+    <div class="hero-botones">
+      <a href="#planes" class="btn-verde">Ver planes y precios</a>
+      <a href="#demos" class="btn-borde">Ver ejemplos →</a>
+    </div>
+  </div>
+  <div class="hero-logo-wrap">
+    <div class="hero-logo-ring2"></div>
+    <div class="hero-logo-ring"></div>
+    <img src="./imagenes/logo_coToHevn.png" alt="CodingToHeaven">
+  </div>
+</section>
+<div class="valor-strip">
+  <div class="valor-item">
+    <span class="valor-icono">🔍</span>
+    <div class="valor-titulo">Aparecer en Google</div>
+    <div class="valor-desc">Tus clientes te buscan online. Con tu página web aparecés en los resultados.</div>
+  </div>
+  <div class="valor-item">
+    <span class="valor-icono">💬</span>
+    <div class="valor-titulo">Contacto por WhatsApp</div>
+    <div class="valor-desc">Botón directo a WhatsApp para que te consulten al instante desde cualquier lugar.</div>
+  </div>
+  <div class="valor-item">
+    <span class="valor-icono">🛍️</span>
+    <div class="valor-titulo">Mostrá tus productos</div>
+    <div class="valor-desc">Catálogo online con fotos, descripciones y precios. Disponible las 24hs.</div>
+  </div>
+  <div class="valor-item">
+    <span class="valor-icono">📍</span>
+    <div class="valor-titulo">Dirección en el mapa</div>
+    <div class="valor-desc">Google Maps integrado para que tus clientes lleguen sin problemas a tu local.</div>
+  </div>
+</div>
+
+<!-- DEMOS -->
+<section id="demos">
+  <div class="sec-label">Ejemplos reales</div>
+  <h2 class="sec-h2">Así quedaría <span>tu negocio</span></h2>
+  <p class="sec-sub">Estos son ejemplos de páginas que desarrollamos. Cada una adaptada al rubro, con su propio estilo y contenido.</p>
+  <div class="grid-demos">
+
+    <div class="demo-card">
+      <div class="demo-preview ferreteria">
+        🔨
+        <span class="demo-tag">Demo</span>
+      </div>
+      <div class="demo-info">
+        <div class="demo-rubro">Ferretería</div>
+        <div class="demo-desc">Catálogo de productos, categorías, precios y consulta directa por WhatsApp.</div>
+        <a href="./ferreteria/ferreteria.html" class="demo-link">Ver demo →</a>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-preview peluqueria">
+        ✂️
+        <span class="demo-tag">Demo</span>
+      </div>
+      <div class="demo-info">
+        <div class="demo-rubro">Peluquería</div>
+        <div class="demo-desc">Servicios con precios, galería de trabajos y sistema de turnos por WhatsApp.</div>
+        <a href="./peluqueria/peluqueria.html" class="demo-link">Ver demo →</a>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-preview electricista">
+        ⚡
+        <span class="demo-tag">Demo</span>
+      </div>
+      <div class="demo-info">
+        <div class="demo-rubro">Electricista</div>
+        <div class="demo-desc">Servicios, zona de cobertura, trabajos realizados y contacto de urgencias.</div>
+        <a href="./electricista/electricista.html" class="demo-link">Ver demo →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes">
+  <div class="planes-header">
+    <div>
+      <div class="sec-label">Precios claros</div>
+      <h2 class="sec-h2" style="margin-bottom:0">Elegí tu <span>plan</span></h2>
+    </div>
+    <a href="https://wa.me/5491100000000?text=Hola! Quiero consultar sobre los planes de página web" class="btn-verde">Consultar por WhatsApp</a>
+  </div>
+
+  <div class="grid-planes">
+
+    <div class="plan-card">
+      <div class="plan-num">Plan 01</div>
+      <div class="plan-nombre">Página básica</div>
+      <div class="plan-desc">Ideal para comercios chicos que quieren presencia online rápida.</div>
+      <div class="plan-precio">$50.000</div>
+      <div class="plan-tiempo">⏱ Entrega en 3 días</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-lista">
+        <li>1 página web completa</li>
+        <li>Información del negocio</li>
+        <li>Ubicación en Google Maps</li>
+        <li>Botón de WhatsApp</li>
+        <li>Horarios de atención</li>
+        <li>Galería de fotos</li>
+        <li>Diseño responsive (celular)</li>
+      </ul>
+      <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Plan Básico" class="plan-cta">Consultar</a>
+    </div>
+
+    <div class="plan-card destacado">
+      <div class="plan-badge">Más elegido</div>
+      <div class="plan-num">Plan 02</div>
+      <div class="plan-nombre">Página comercial</div>
+      <div class="plan-desc">Para negocios que quieren mostrar su catálogo y captar más clientes.</div>
+      <div class="plan-precio">$120.000</div>
+      <div class="plan-tiempo">⏱ Entrega en 5–7 días</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-lista">
+        <li>Todo lo del Plan Básico</li>
+        <li>Varias secciones</li>
+        <li>Catálogo de productos</li>
+        <li>Formulario de contacto</li>
+        <li>Optimización básica para Google</li>
+        <li>Conexión con redes sociales</li>
+      </ul>
+      <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Plan Comercial" class="plan-cta">Consultar</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-num">Plan 03</div>
+      <div class="plan-nombre">Página avanzada</div>
+      <div class="plan-desc">Para negocios que quieren una solución completa y profesional.</div>
+      <div class="plan-precio rango">$200.000 – $350.000</div>
+      <div class="plan-tiempo">⏱ Tiempo a coordinar</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-lista">
+        <li>Todo lo anterior</li>
+        <li>Panel para editar contenido</li>
+        <li>Blog o sección de novedades</li>
+        <li>Catálogo más grande</li>
+        <li>WhatsApp automático integrado</li>
+        <li>Dominio incluido 1 año</li>
+      </ul>
+      <a href="https://wa.me/5491100000000?text=Hola! Me interesa el Plan Avanzado" class="plan-cta">Consultar</a>
+    </div>
+
+  </div>
+
+  <!-- PLAN MANTENIMIENTO -->
+  <div class="plan-mante">
+    <div class="mante-izq">
+      <div class="mante-num">Plan 04 — Adicional</div>
+      <div class="mante-nombre">Diseño y acompañamiento</div>
+      <div class="mante-desc">Se suma a cualquier plan. Nos encargamos del hosting, los cambios y la seguridad para que vos te concentres en tu negocio.</div>
+      <ul class="mante-lista">
+        <li>Hosting</li>
+        <li>Cambios pequeños</li>
+        <li>Soporte</li>
+        <li>Backup</li>
+        <li>Seguridad</li>
+      </ul>
+    </div>
+    <div>
+      <div class="mante-precio">
+        $8.000 – $15.000
+        <small>por mes · se suma al plan elegido</small>
+      </div>
+      <a href="https://wa.me/5491100000000?text=Hola! Me interesa el plan de mantenimiento" class="btn-verde" style="display:inline-block;margin-top:1.2rem;font-size:.85rem;padding:12px 24px">Consultar</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contacto-wrap">
+    <div class="contacto-izq">
+      <div class="sec-label">Hablemos</div>
+      <h2 class="sec-h2">¿Querés tu<br><span>página web?</span></h2>
+      <p>Contanos de tu negocio y te respondemos con un presupuesto en el día. Sin vueltas.</p>
+      <div class="contacto-links">
+        <a href="https://wa.me/5491100000000" class="cto-link">
+          <span class="cto-link-icono">💬</span>
+          <div><span class="cto-link-key">WhatsApp</span><span class="cto-link-val">11 XXXX-XXXX</span></div>
+        </a>
+        <a href="mailto:info@codingtoheaven.com" class="cto-link">
+          <span class="cto-link-icono">📧</span>
+          <div><span class="cto-link-key">Email</span><span class="cto-link-val">info@codingtoheaven.com</span></div>
+        </a>
+        <a href="https://instagram.com/codingtoheaven" class="cto-link">
+          <span class="cto-link-icono">📸</span>
+          <div><span class="cto-link-key">Instagram</span><span class="cto-link-val">@codingtoheaven</span></div>
+        </a>
+      </div>
+    </div>
+    <div class="contacto-der">
+      <h3>Pedí tu presupuesto</h3>
+      <div class="form-group">
+        <label>Tu nombre</label>
+        <input type="text" placeholder="Juan García">
+      </div>
+      <div class="form-group">
+        <label>Tu negocio</label>
+        <input type="text" placeholder="Ferretería, peluquería, etc.">
+      </div>
+      <div class="form-group">
+        <label>Plan de interés</label>
+        <select>
+          <option value="">Seleccioná un plan</option>
+          <option>Plan 01 — Básico ($50.000)</option>
+          <option>Plan 02 — Comercial ($120.000)</option>
+          <option>Plan 03 — Avanzado ($200.000–$350.000)</option>
+          <option>No sé todavía, quiero asesoramiento</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>¿Algo más que quieras contarnos?</label>
+        <textarea placeholder="Contanos sobre tu negocio..."></textarea>
+      </div>
+      <button class="btn-form" onclick="enviarWA()">Enviar por WhatsApp →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="./imagenes/logo_coToHevn.png" alt="CodingToHeaven">
+    Coding<span>ToHeaven</span>
+  </div>
+  <div class="footer-copy">© 2025 CodingToHeaven · Páginas web para negocios · Buenos Aires</div>
+</footer>
+
+<!-- WA FAB -->
+<a href="https://wa.me/5491100000000" class="wa-fab" target="_blank" title="Consultanos por WhatsApp">💬</a>
+
+<script>
+function enviarWA() {
+  const nombre = document.querySelector('input[placeholder="Juan García"]').value;
+  const negocio = document.querySelector('input[placeholder="Ferretería, peluquería, etc."]').value;
+  const plan = document.querySelector('select').value;
+  const mensaje = document.querySelector('textarea').value;
+
+  if (!nombre || !negocio) {
+    alert('Por favor completá tu nombre y negocio.');
+    return;
+  }
+
+  const texto = `Hola! Quiero consultar sobre una página web.\n\n👤 Nombre: ${nombre}\n🏪 Negocio: ${negocio}\n📋 Plan: ${plan || 'Sin definir'}\n💬 Mensaje: ${mensaje || 'Sin mensaje adicional'}`;
+  window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(texto)}`, '_blank');
+}
+</script>
+
+</body>
+</html>
