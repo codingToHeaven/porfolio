@@ -442,6 +442,62 @@ section > * {
   .horarios-box { grid-template-columns: 1fr; }
   .ubic-layout { grid-template-columns: 1fr; }
 }
+
+/* MENÚ HAMBURGUESA */
+.hamburguesa {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 101;
+}
+.hamburguesa span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--texto);
+  transition: all .3s;
+}
+.hamburguesa.abierto span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburguesa.abierto span:nth-child(2) {
+  opacity: 0;
+}
+.hamburguesa.abierto span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .hamburguesa {
+    display: flex;
+  }
+  nav ul {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: rgba(8,9,12,.98);
+    flex-direction: column;
+    padding: 2rem 6%;
+    gap: 0;
+    border-bottom: 1px solid var(--borde);
+  }
+  nav ul.abierto {
+    display: flex;
+  }
+  nav ul li a {
+    display: block;
+    padding: 1rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--borde);
+  }
+  nav ul li:last-child a {
+    border-bottom: none;
+    margin-top: .5rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -547,13 +603,12 @@ section > * {
   <h2 class="seccion-titulo">NUESTRO <span class="acento">LOCAL</span></h2>
   <div class="seccion-linea"></div>
   <div class="grid-galeria">
-    <div class="galeria-item">🏪</div>
-    <div class="galeria-item">🔧</div>
-    <div class="galeria-item">🔩</div>
-    <div class="galeria-item">🪚</div>
-    <div class="galeria-item">🎨</div>
+    <div class="galeria-item"><img src="./imagenes/negocio.png" alt="Negocio"></div>
+    <div class="galeria-item"><img src="./imagenes/llaves_combinadas.png" alt="Producto 1"></div>
+    <div class="galeria-item"><img src="./imagenes/taladro_percutor.png" alt="Producto 2"></div>
+    <div class="galeria-item"><img src="./imagenes/martillo_carpintero.jpeg" alt="Producto 3"></div>
+    <div class="galeria-item"><img src="./imagenes/pintura_latex.jpeg" alt="Producto 4"></div>
   </div>
-  <p style="margin-top:1rem;color:var(--texto-suave);font-size:.85rem;">📸 Reemplazá los emojis por fotos reales del local y los productos.</p>
 </section>
 
 <!-- HORARIOS -->

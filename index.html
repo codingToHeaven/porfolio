@@ -560,15 +560,32 @@ section > * {
   /* HERO */
   #inicio {
     padding: 90px 6% 60px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
   }
 
+  .hero-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  }
+
+  .hero-logo-wrap img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-logo-ring,
+  .hero-logo-ring2 {
+    display: none;
+  }
   
-    .hero-h1 {
+  .hero-h1 {
     font-size: clamp(1.8rem, 9vw, 3rem);
     overflow-wrap: break-word;
     word-break: break-word;
   }
-  
+
   .hero-desc {
     font-size: .95rem;
   }
@@ -604,6 +621,63 @@ section > * {
   @media (max-width: 480px) {
     .valor-strip { grid-template-columns: 1fr; }
   }
+
+  /* MENÚ HAMBURGUESA */
+.hamburguesa {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 101;
+}
+.hamburguesa span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--texto);
+  transition: all .3s;
+}
+.hamburguesa.abierto span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburguesa.abierto span:nth-child(2) {
+  opacity: 0;
+}
+.hamburguesa.abierto span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .hamburguesa {
+    display: flex;
+  }
+  nav ul {
+    display: none;
+    position: fixed;
+    top: 66px;
+    left: 0; right: 0;
+    background: rgba(8,9,12,.98);
+    flex-direction: column;
+    padding: 2rem 6%;
+    gap: 0;
+    border-bottom: 1px solid var(--borde);
+  }
+  nav ul.abierto {
+    display: flex;
+  }
+  nav ul li a {
+    display: block;
+    padding: 1rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--borde);
+  }
+  nav ul li:last-child a {
+    border-bottom: none;
+    margin-top: .5rem;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -614,12 +688,17 @@ section > * {
     <img src="./imagenes/logo_coToHevn.png" alt="CodingToHeaven">
     <span class="nav-logo-texto">Coding<span>ToHeaven</span></span>
   </a>
-  <ul>
+  <ul id="navMenu">
     <li><a href="#demos">Demos</a></li>
     <li><a href="#planes">Planes</a></li>
     <li><a href="#contacto">Contacto</a></li>
     <li><a href="https://wa.me/5491150613167" class="nav-btn">Consultar</a></li>
   </ul>
+  <div class="hamburguesa" id="hamburguesa" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -887,6 +966,21 @@ function enviarWA() {
   const texto = `Hola! Quiero consultar sobre una página web.\n\n👤 Nombre: ${nombre}\n🏪 Negocio: ${negocio}\n📋 Plan: ${plan || 'Sin definir'}\n💬 Mensaje: ${mensaje || 'Sin mensaje adicional'}`;
   window.open(`https://wa.me/5491150613167?text=${encodeURIComponent(texto)}`, '_blank');
 }
+
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  const btn = document.getElementById('hamburguesa');
+  menu.classList.toggle('abierto');
+  btn.classList.toggle('abierto');
+}
+
+// Cierra el menú al hacer click en un link
+document.querySelectorAll('#navMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navMenu').classList.remove('abierto');
+    document.getElementById('hamburguesa').classList.remove('abierto');
+  });
+});
 </script>
 
 </body>

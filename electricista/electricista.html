@@ -408,6 +408,9 @@ section > * {
   @media (max-width: 768px) {
   /* PADDING GENERAL */
 
+   .logo-el {
+    font-size: 1rem;
+  }
   section {
     padding: 70px 6% !important;
   }
@@ -459,6 +462,62 @@ section > * {
   .horarios-box { grid-template-columns: 1fr; }
   .ubic-layout { grid-template-columns: 1fr; }
 }
+
+/* MENÚ HAMBURGUESA */
+.hamburguesa {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 101;
+}
+.hamburguesa span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--texto);
+  transition: all .3s;
+}
+.hamburguesa.abierto span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburguesa.abierto span:nth-child(2) {
+  opacity: 0;
+}
+.hamburguesa.abierto span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .hamburguesa {
+    display: flex;
+  }
+  nav ul {
+    display: none;
+    position: fixed;
+    top: 66px;
+    left: 0; right: 0;
+    background: rgba(8,9,12,.98);
+    flex-direction: column;
+    padding: 2rem 6%;
+    gap: 0;
+    border-bottom: 1px solid var(--borde);
+  }
+  nav ul.abierto {
+    display: flex;
+  }
+  nav ul li a {
+    display: block;
+    padding: 1rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--borde);
+  }
+  nav ul li:last-child a {
+    border-bottom: none;
+    margin-top: .5rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -466,7 +525,7 @@ section > * {
 <!-- NAV -->
 <nav>
   <div class="logo-el"><div class="logo-dot"></div>ELECTRO<span style="color:var(--azul)">SERVICIO</span></div>
-  <ul>
+  <ul id="navMenu">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#galeria">Trabajos</a></li>
@@ -474,6 +533,11 @@ section > * {
     <li><a href="#ubicacion">Zona</a></li>
     <li><a href="https://wa.me/5491150613167" class="nav-cta">Solicitar presupuesto</a></li>
   </ul>
+   <div class="hamburguesa" id="hamburguesa" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -552,14 +616,14 @@ section > * {
       <div class="sec-eyebrow">Portfolio</div>
       <h2 class="sec-h2" style="margin-bottom:0">Trabajos <span>realizados</span></h2>
     </div>
-    <a href="https://wa.me/5491150613167" class="btn-ghost">Ver todos →</a>
+    <a href="https://wa.me/5491150613167" class="btn-ghost">Contactar al desarrollador →</a>
   </div>
   <div class="grid-trabajos">
-    <div class="trab-item wide"><img src="./imagenes/casa_ilumunada.png" alt="Trabajo 1"></div>
-    <div class="trab-item"><img src="./imagenes/tablero.png" alt="Trabajo 1"></div>
-    <div class="trab-item"><img src="./imagenes/camara.png" alt="Trabajo 1"></div>
-    <div class="trab-item"><img src="./imagenes/luz.png" alt="Trabajo 1"></div>
-    <div class="trab-item"><img src="./imagenes/cliente.png" alt="Trabajo 1"></div>
+    <div class="trab-item wide"><img src="./imagenes/casa_ilumunada.png" alt="casa"></div>
+    <div class="trab-item"><img src="./imagenes/tablero.png" alt="tablero"></div>
+    <div class="trab-item"><img src="./imagenes/camara.png" alt="camara"></div>
+    <div class="trab-item"><img src="./imagenes/luz.png" alt="luz"></div>
+    <div class="trab-item"><img src="./imagenes/cliente.png" alt="cliente"></div>
   </div>
 </section>
 
@@ -643,7 +707,22 @@ section > * {
 </footer>
 
 <!-- WA FAB -->
-<a href="https://wa.me/549115061167" class="wa-fab" target="_blank" title="Consultanos por WhatsApp">💬</a>
+<a href="https://wa.me/5491150613167" class="wa-fab" target="_blank" title="Consultanos por WhatsApp">💬</a>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('navMenu');
+      const btn = document.getElementById('hamburguesa');
+      menu.classList.toggle('abierto');
+      btn.classList.toggle('abierto');
+    }
 
+    // Cierra el menú al hacer click en un link
+    document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navMenu').classList.remove('abierto');
+        document.getElementById('hamburguesa').classList.remove('abierto');
+      });
+    });
+  </script>
 </body>
 </html>
