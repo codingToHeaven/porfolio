@@ -551,90 +551,7 @@ section > * {
   .footer-logo span { color: var(--verde); }
   .footer-copy { color: var(--texto-suave); font-size: .78rem; }
 
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-
-
-  .mante-precio {
-    font-size: 1.2rem;
-    word-break: break-word;
-  }
-  
-  /* PADDING GENERAL */
-  section {
-    padding: 70px 6% !important;
-  }
-
-  nav {
-    padding: 0 6%;
-  }
-
-  /* HERO */
-  #inicio {
-    padding: 90px 6% 60px;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-  }
-
-  .hero-logo-wrap {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  }
-
-  .hero-logo-wrap img {
-    width: 140px;
-    height: 140px;
-  }
-
-  .hero-logo-ring,
-  .hero-logo-ring2 {
-    display: none;
-  }
-  
-  .hero-h1 {
-    font-size: clamp(1.8rem, 9vw, 3rem);
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  .hero-desc {
-    font-size: .95rem;
-  }
-
-  .hero-acciones {
-    flex-direction: column;
-  }
-
-  .btn-azul, .btn-ghost {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-
-  /* STATS */
-  .hero-chips {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  /* NAV */
-  nav ul { display: none; }
-
-  /* GRIDS */
-  .grid-servicios-el { grid-template-columns: 1fr; }
-  .grid-trabajos { grid-template-columns: 1fr 1fr; }
-  .trab-item { height: 160px; }
-  .trab-item.wide { grid-column: 1/3; height: 200px; }
-  .horarios-box { grid-template-columns: 1fr; }
-  .ubic-layout { grid-template-columns: 1fr; }
-}
-  @media (max-width: 480px) {
-    .valor-strip { grid-template-columns: 1fr; }
-  }
-
-  /* MENÚ HAMBURGUESA */
+/* MENÚ HAMBURGUESA — fuera del media query */
 .hamburguesa {
   display: none;
   flex-direction: column;
@@ -660,10 +577,24 @@ section > * {
   transform: translateY(-7px) rotate(-45deg);
 }
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
+
+  /* PADDING GENERAL */
+  section {
+    padding: 70px 6% !important;
+  }
+
+  nav {
+    padding: 0 6%;
+  }
+
+  /* HAMBURGUESA */
   .hamburguesa {
     display: flex;
   }
+
+  /* NAV MENÚ */
   nav ul {
     display: none;
     position: fixed;
@@ -688,6 +619,101 @@ section > * {
     border-bottom: none;
     margin-top: .5rem;
   }
+
+  /* HERO */
+  #inicio {
+    padding: 90px 6% 60px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .hero-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .hero-logo-wrap img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-logo-ring,
+  .hero-logo-ring2 {
+    display: none;
+  }
+
+  .hero-h1 {
+    font-size: clamp(1.8rem, 9vw, 3rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .hero-desc {
+    font-size: .95rem;
+  }
+
+  .hero-acciones {
+    flex-direction: column;
+  }
+
+  .btn-verde,
+  .btn-borde,
+  .btn-azul,
+  .btn-ghost {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* STATS */
+  .hero-chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  /* PLANES */
+  .mante-precio {
+    font-size: 1.2rem;
+    word-break: break-word;
+  }
+
+  /* CONTACTO */
+  .contacto-wrap {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contacto-der {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .btn-form {
+    width: 100%;
+    padding: 16px;
+  }
+
+  /* GRIDS */
+  .grid-servicios-el { grid-template-columns: 1fr; }
+  .grid-trabajos { grid-template-columns: 1fr 1fr; }
+  .trab-item { height: 160px; }
+  .trab-item.wide { grid-column: 1/3; height: 200px; }
+  .horarios-box { grid-template-columns: 1fr; }
+  .ubic-layout { grid-template-columns: 1fr; }
+
+}
+
+@media (max-width: 480px) {
+  .valor-strip { grid-template-columns: 1fr; }
 }
 
 </style>
@@ -879,7 +905,7 @@ section > * {
   <div class="plan-mante">
     <div class="mante-izq">
       <div class="mante-num">Plan 04 — Adicional</div>
-      <div class="mante-nombre">Diseño y <br>Acompañamiento</div>
+      <div class="mante-nombre">Diseño y <br>Soporte</div>
       <div class="mante-desc">Se suma a cualquier plan. Nos encargamos del hosting, los cambios y la seguridad para que vos te concentres en tu negocio.</div>
       <ul class="mante-lista">
         <li>Hosting</li>
