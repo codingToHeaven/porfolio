@@ -183,6 +183,11 @@ section > * {
     padding: 2rem 2.5rem;
     display: flex; flex-direction: column; gap: .6rem;
   }
+  .valor-item img {
+    width: 25px;
+  height: 25px;
+  object-fit: contain;
+  }
   .valor-icono { font-size: 1.8rem; }
   .valor-titulo {
     font-family: 'Syne', sans-serif;
@@ -256,9 +261,16 @@ section > * {
     overflow: hidden;
     transition: border-color .3s, transform .2s;
   }
+  .demo-card img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    transition: transform .3s;
+  }
   .demo-card:hover { border-color: var(--verde); transform: translateY(-4px); }
   .demo-preview {
     height: 200px;
+    overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     font-size: 5rem;
     position: relative;
@@ -286,7 +298,7 @@ section > * {
   }
   .demo-link {
     display: inline-flex; align-items: center; gap: .4rem;
-    color: var(--verde); font-size: .82rem; font-weight: 600;
+    color: var(--verde); font-size: 1rem; font-weight: 600;
     text-decoration: none; letter-spacing: .5px;
     transition: gap .2s;
   }
@@ -741,7 +753,7 @@ section > * {
     <div class="valor-desc">Catálogo online con fotos, descripciones y precios. Disponible las 24hs.</div>
   </div>
   <div class="valor-item">
-    <span class="valor-icono">📍</span>
+    <span class="valor-icono"><img src="./imagenes/maps-location.svg" alt="maps"></span>
     <div class="valor-titulo">Dirección en el mapa</div>
     <div class="valor-desc">Google Maps integrado para que tus clientes lleguen sin problemas a tu local.</div>
   </div>
@@ -756,8 +768,8 @@ section > * {
 
     <div class="demo-card">
       <div class="demo-preview ferreteria">
-        🔨
-        <span class="demo-tag">Demo</span>
+       <img src="./ferreteria/imagenes/negocio.png" alt="Ferretería">
+        
       </div>
       <div class="demo-info">
         <div class="demo-rubro">Ferretería</div>
@@ -768,8 +780,8 @@ section > * {
 
     <div class="demo-card">
       <div class="demo-preview peluqueria">
-        ✂️
-        <span class="demo-tag">Demo</span>
+        <img src="./peluqueria/imagenes/logo_estudio_valentina.png" alt="Peluquería">
+        
       </div>
       <div class="demo-info">
         <div class="demo-rubro">Peluquería</div>
@@ -780,8 +792,8 @@ section > * {
 
     <div class="demo-card">
       <div class="demo-preview electricista">
-        ⚡
-        <span class="demo-tag">Demo</span>
+        <img src="./electricista/imagenes/tablero.png" alt="Electricista">
+        
       </div>
       <div class="demo-info">
         <div class="demo-rubro">Electricista</div>
@@ -867,7 +879,7 @@ section > * {
   <div class="plan-mante">
     <div class="mante-izq">
       <div class="mante-num">Plan 04 — Adicional</div>
-      <div class="mante-nombre">Diseño y acompañamiento</div>
+      <div class="mante-nombre">Diseño y <br>Acompañamiento</div>
       <div class="mante-desc">Se suma a cualquier plan. Nos encargamos del hosting, los cambios y la seguridad para que vos te concentres en tu negocio.</div>
       <ul class="mante-lista">
         <li>Hosting</li>
