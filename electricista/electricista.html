@@ -101,7 +101,7 @@ section > * {
       linear-gradient(90deg, rgba(0,102,255,.04) 1px, transparent 1px);
     background-size: 50px 50px;
   }
-  .hero-contenido { position: relative; z-index: 1; max-width: 720px; }
+  .hero-contenido { position: relative; z-index: 1; max-width: 720px; width: 100%; }
 
   .disponible-badge {
     display: inline-flex; align-items: center; gap: .5rem;
@@ -125,6 +125,9 @@ section > * {
     line-height: .95;
     letter-spacing: -2px;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .hero-h1 .azul { color: var(--azul); }
   .hero-h1 .stroke {
@@ -342,11 +345,11 @@ section > * {
     border-bottom: 1px solid var(--borde);
     align-items: flex-start;
   }
-  .cto-icono {
-    width: 36px; height: 36px;
-    background: rgba(0,102,255,.1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: clamp(2rem, 8vw, 6rem); flex-shrink: 0;
+  .cto-icono img{
+    width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: invert(1);  /* los pone en blanco si son negros */
   }
   .cto-key {
     font-size: .72rem; letter-spacing: 2px; text-transform: uppercase;
@@ -397,6 +400,10 @@ section > * {
     padding: 3rem 5%;
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo img {
+    width: 34px; height: 34px;
+    border-radius: 50%; object-fit: cover;
   }
   .footer-logo-el {
     font-family: 'Syne', sans-serif;
@@ -547,9 +554,9 @@ section > * {
   <div class="hero-contenido">
     <div class="disponible-badge"><span class="disponible-dot"></span>Disponible ahora · Urgencias 24hs</div>
     <h1 class="hero-h1">
-      <span class="stroke">INSTALA</span><br>
-      <span class="azul">CIONES</span><br>
-      ELÉCTRICAS
+      <span class="stroke">INSTALA</span>
+      <span class="azul">CIONES</span>
+      <span style="align-self:center;">ELÉCTRICAS</span>
     </h1>
     <p class="hero-desc">Instalaciones residenciales y comerciales, tableros, domótica y urgencias eléctricas. Trabajo garantizado con todos los materiales incluidos.</p>
     <div class="hero-acciones">
@@ -571,7 +578,7 @@ section > * {
   <h2 class="sec-h2">¿Qué <span>hacemos?</span></h2>
   <div class="grid-servicios-el">
     <div class="serv-el">
-      <div class="serv-el-icono">⚡</div>
+      <div class="serv-el-icono"><img src="./imagenes/tablero.png" alt="Tablero"></div>
       <div class="serv-el-nombre">Instalaciones nuevas</div>
       <div class="serv-el-desc">Instalaciones eléctricas completas para obras nuevas. Cableado, tableros y tomacorrientes según reglamento.</div>
       <div class="serv-el-precio">Presupuesto por visita</div>
@@ -676,23 +683,23 @@ section > * {
     </div>
     <div class="contacto-lista">
       <div class="cto-item">
-        <div class="cto-icono">📍</div>
+        <div class="cto-icono"><img src="../imagenes/maps-location.svg" alt="maps"></div>
         <div><span class="cto-key">Base operativa</span><span class="cto-val">San Martín, Buenos Aires</span></div>
       </div>
       <div class="cto-item">
-        <div class="cto-icono">📞</div>
+        <div class="cto-icono"><img src="../imagenes/phone.svg" alt="teléfono"></div>
         <div><span class="cto-key">Teléfono</span><span class="cto-val">011 4XXX-XXXX</span></div>
       </div>
       <div class="cto-item">
-        <div class="cto-icono">💬</div>
+        <div class="cto-icono"><img src="../imagenes/whatsapp.svg" alt="WhatsApp"></div>
         <div><span class="cto-key">WhatsApp</span><span class="cto-val">11 XXXX-XXXX</span></div>
       </div>
       <div class="cto-item">
-        <div class="cto-icono">📧</div>
+        <div class="cto-icono"><img src="../imagenes/email.svg" alt="Email"></div>
         <div><span class="cto-key">Email</span><span class="cto-val">info@electroservicio.com</span></div>
       </div>
       <div class="cto-item">
-        <div class="cto-icono">🪪</div>
+        <div class="cto-icono"><img src="../imagenes/id-card.svg" alt="Matrícula"></div>
         <div><span class="cto-key">Matrícula</span><span class="cto-val">Electricista matriculado · GCABA Nº XXXX</span></div>
       </div>
       <a href="https://wa.me/5491150613167?text=Hola! Quiero pedir un presupuesto" class="btn-azul" style="margin-top:2rem;display:inline-flex">⚡ Solicitar presupuesto</a>
@@ -702,8 +709,11 @@ section > * {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo-el"><div class="logo-dot"></div>ELECTRO<span style="color:var(--azul)">SERVICIO</span></div>
-  <div class="footer-copy">© 2025 ElectroServicio · Instalaciones Eléctricas · Buenos Aires</div>
+  <div class="footer-logo">
+    <img src="../imagenes/logo_coToHevn.png" alt="CodingToHeaven">
+    Coding<span>ToHeaven</span>
+  </div>
+  <div class="footer-copy">© 2025 CodingToHeaven · Páginas web para negocios · Buenos Aires</div>
 </footer>
 
 <!-- WA FAB -->
