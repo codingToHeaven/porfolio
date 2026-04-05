@@ -91,7 +91,7 @@ section > * {
     color: white;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: .8rem; letter-spacing: 3px; text-transform: uppercase;
-    padding: 15px 12px; margin-bottom: 1.5rem;
+    padding: 25px 12px; margin-bottom: 1.5rem;
   }
   .hero-titulo {
     font-family: 'Bebas Neue', sans-serif;
@@ -113,6 +113,7 @@ section > * {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
     padding: 14px 36px;
+    margin-bottom: 1rem;
     text-decoration: none;
     transition: background .2s, transform .2s;
     border: none; cursor: pointer;
@@ -126,7 +127,8 @@ section > * {
     font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
     padding: 12px 36px;
     text-decoration: none;
-    margin-left: 1rem;
+    margin-left: 0;
+    margin-bottom: 1rem;
     transition: border-color .2s, color .2s;
   }
   .btn-secundario:hover { border-color: var(--amarillo); color: var(--amarillo); }
@@ -387,17 +389,25 @@ section > * {
 
   /* FOOTER */
   footer {
-    background: #080808;
-    border-top: 3px solid var(--rojo);
+    background: #050506;
+    border-top: 1px solid var(--borde);
     padding: 3rem 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 1.5rem;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
   }
-  footer .logo { font-size: 1.5rem; }
-  .footer-copy {
-    color: var(--texto-suave);
-    font-size: .8rem;
+  .footer-logo {
+    display: flex; align-items: center; gap: .7rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 900;
+    color: var(--blanco);
   }
+  .footer-logo img {
+    width: 34px; height: 34px;
+    border-radius: 50%; object-fit: cover;
+  }
+  .footer-logo span { color: var(--verde); }
+  .footer-copy { color: var(--texto-suave); font-size: .78rem; }
+
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
@@ -413,7 +423,12 @@ section > * {
   /* HERO */
   #inicio {
     padding: 90px 6% 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
   }
+  
 
   .hero-h1 {
     font-size: clamp(1.8rem, 9vw, 3rem);
@@ -421,6 +436,27 @@ section > * {
     word-break: break-word;
   }
 
+  .hero-stats {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.hero-stats .stat {
+  flex: 1;
+  min-width: 80px;
+  text-align: center;
+}
+
+.hero-contenido {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+}
   .hero-desc {
     font-size: .95rem;
   }
@@ -533,17 +569,18 @@ section > * {
 <!-- HERO -->
 <section id="inicio">
   <div class="hero-contenido">
-    <div class="hero-badge">📍 San Martín, Buenos Aires</div>
+    <div class="hero-badge"> San Martín, Buenos Aires</div>
     <h1 class="hero-titulo">TODO<br>LO QUE<br>NECESI<span class="acento">TÁS</span></h1>
     <p class="hero-sub">Herramientas, materiales y soluciones para tu obra o reparación. Atención personalizada y los mejores precios de la zona.</p>
     <a href="#productos" class="btn-primario">Ver catálogo</a>
     <a href="https://wa.me/5491100000000" class="btn-secundario">Consultar precio</a>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">+500</div><div class="stat-label">Productos</div></div>
+      <div class="stat"><div class="stat-num">25</div><div class="stat-label">Años</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Días/semana</div></div>
+    </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">+500</div><div class="stat-label">Productos</div></div>
-    <div class="stat"><div class="stat-num">25</div><div class="stat-label">Años</div></div>
-    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Días/semana</div></div>
-  </div>
+  
 </section>
 
 <!-- PRODUCTOS -->
@@ -684,12 +721,15 @@ section > * {
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">FERRETER<span style="color:var(--rojo)">Í</span>A DON HÉCTOR</div>
-  <div class="footer-copy">© 2025 Ferretería Don Héctor · Todos los derechos reservados</div>
+  <div class="footer-logo">
+    <img src="../imagenes/logo_coToHevn.png" alt="CodingToHeaven">
+    Coding<span>ToHeaven</span>
+  </div>
+  <div class="footer-copy">© 2025 CodingToHeaven · Páginas web para negocios · Buenos Aires</div>
 </footer>
 
-<!-- WHATSAPP FAB -->
-<a href="https://wa.me/5491100000000" class="whatsapp-fab" target="_blank" title="Consultanos por WhatsApp">💬</a>
+<!-- WA FAB -->
+<a href="https://wa.me/5491150613167" class="wa-fab" target="_blank" title="Consultanos por WhatsApp">💬</a>
 
 <script>
 function toggleMenu() {

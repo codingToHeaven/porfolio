@@ -79,6 +79,7 @@ section > * {
   .hero-eyebrow {
     font-size: .75rem; letter-spacing: 4px; text-transform: uppercase;
     color: var(--dorado);
+    margin-top: 1rem;
     margin-bottom: 2rem;
     display: flex; align-items: center; gap: 1rem;
   }
@@ -150,10 +151,13 @@ section > * {
   
   .hero-visual::before {
     content: '';
-    position: absolute; top: -30px; right: -30px;
-    width: 200px; height: 200px;
+    position: absolute; width: 100px;
+    height: 100px;
+    top: -15px;
+    right: -15px;
     border: 1px solid var(--borde);
     border-radius: 50%;
+    
   }
   .hero-visual::after {
     content: 'ESTUDIO';
@@ -341,19 +345,29 @@ section > * {
 
   /* FOOTER */
   footer {
-    background: #100e0c;
+    background: #050506;
     border-top: 1px solid var(--borde);
     padding: 3rem 5%;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1.5rem;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
   }
   .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem; letter-spacing: 3px;
-    color: var(--crema);
+    display: flex; align-items: center; gap: .7rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 900;
+    color: var(--blanco);
   }
-  .footer-logo span { color: var(--dorado); }
+  .footer-logo img {
+    width: 34px; height: 34px;
+    border-radius: 50%; object-fit: cover;
+  }
+  .footer-logo span { color: var(--verde); }
   .footer-copy { color: var(--texto-suave); font-size: .78rem; }
+  .wa-fab img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
 
   @media (max-width: 768px) {
 
@@ -385,13 +399,21 @@ section > * {
   }
 
   .hero-der {
-    justify-content: flex-start;
-    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    min-height: 280px; 
   }
-
   .hero-visual {
     width: 100%;
     height: 260px;
+    overflow: visible;
+  }
+
+  .hero-visual img {
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
   }
 
   .hero-desc {
@@ -635,12 +657,16 @@ section > * {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">ESTUDIO <span>VALENTINA</span></div>
-  <div class="footer-copy">© 2025 Estudio Valentina · Todos los derechos reservados</div>
+  <div class="footer-logo">
+    <img src="../imagenes/logo_coToHevn.png" alt="CodingToHeaven">
+    Coding<span>ToHeaven</span>
+  </div>
+  <div class="footer-copy">© 2025 CodingToHeaven · Páginas web para negocios · Buenos Aires</div>
 </footer>
 
 <!-- WA FAB -->
-<a href="https://wa.me/5491100000000" class="wa-fab" target="_blank" title="Escribinos por WhatsApp">💬</a>
+<a href="https://wa.me/5491150613167" class="wa-fab" target="_blank" title="Consultanos
+ por WhatsApp"><img src="../imagenes/whatsapp.svg" alt=""></a>
 
 <script>
 function toggleMenu() {
