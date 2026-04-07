@@ -440,6 +440,48 @@ section > * {
     font-size: .75rem; padding: 3px 10px;
   }
 
+
+  /* PLAN HOSTING */
+  .plan-hosting {
+    margin-top: 1.5rem;
+    background: var(--gris-card);
+    border: 1px solid var(--borde);
+    padding: 2rem 2.5rem;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hosting-izq { flex: 1; min-width: 200px; }
+  .hosting-num {
+    font-size: .72rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--verde); margin-bottom: .5rem;
+  }
+  .hosting-nombre {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 900; margin-bottom: .4rem;
+  }
+  .hosting-desc { color: var(--texto-suave); font-size: .85rem; line-height: 1.6; }
+  .hosting-precio {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem; font-weight: 900;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .hosting-precio small {
+    display: block; font-size: .75rem; font-family: 'Epilogue', sans-serif;
+    font-weight: 400; color: var(--texto-suave); margin-top: .2rem;
+  }
+  .hosting-lista {
+    list-style: none; display: flex; flex-wrap: wrap; gap: .5rem;
+    margin-top: 1rem;
+  }
+  .hosting-lista li {
+    background: rgba(0,255,135,.08);
+    border: 1px solid rgba(0,255,135,.15);
+    color: var(--verde);
+    font-size: .75rem; padding: 3px 10px;
+  }
+
   /* CONTACTO */
   #contacto { background: var(--gris); }
   .contacto-wrap {
@@ -904,9 +946,9 @@ section > * {
   <!-- PLAN MANTENIMIENTO -->
   <div class="plan-mante">
     <div class="mante-izq">
-      <div class="mante-num">Plan 04 — Adicional</div>
+      <div class="mante-num">Plan 05 — Adicional</div>
       <div class="mante-nombre">Diseño y <br>Soporte</div>
-      <div class="mante-desc">Se suma a cualquier plan. Nos encargamos del hosting, los cambios y la seguridad para que vos te concentres en tu negocio.</div>
+      <div class="mante-desc">Se suma a cualquier plan. Nos encargamos de los cambios y la seguridad para que vos te concentres en tu negocio.</div>
       <ul class="mante-lista">
         <li>Hosting</li>
         <li>Cambios pequeños</li>
@@ -918,6 +960,29 @@ section > * {
     <div>
       <div class="mante-precio">
         $12.000 – $25.000
+        <small>por mes · se suma al plan elegido</small>
+      </div>
+      <a href="https://wa.me/5491150613167?text=Hola! Me interesa el plan de mantenimiento" class="btn-verde" style="display:inline-block;margin-top:1.2rem;font-size:.85rem;padding:12px 24px">Consultar</a>
+    </div>
+  </div>
+
+  <!-- PLAN HOSTING -->
+  <div class="plan-hosting">
+    <div class="hosting-izq">
+      <div class="hosting-num">Plan 04 — Adicional</div>
+      <div class="hosting-nombre">Hosting y <br>Dominio</div>
+      <div class="hosting-desc">Se suma a cualquier plan. Nos encargamos del hosting, el soporte, el dominio y actualizaciones</div>
+      <ul class="hosting-lista">
+        <li>Hosting</li>
+        <li>Dominio</li>
+        <li>Soporte</li>
+        <li>Backup</li>
+        <li>Seguridad</li>
+      </ul>
+    </div>
+    <div>
+      <div class="hosting-precio">
+        $15.000 – $30.000
         <small>por mes · se suma al plan elegido</small>
       </div>
       <a href="https://wa.me/5491150613167?text=Hola! Me interesa el plan de mantenimiento" class="btn-verde" style="display:inline-block;margin-top:1.2rem;font-size:.85rem;padding:12px 24px">Consultar</a>
