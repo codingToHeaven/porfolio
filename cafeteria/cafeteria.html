@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Raíz — Cafetería de barrio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crema: #f5efe4;
+    --cafe: #2c1a0e;
+    --cafe-medio: #5c3d1e;
+    --cafe-claro: #8b5e3c;
+    --tostado: #c4873a;
+    --verde-hoja: #4a5e3a;
+    --rosa-suave: #e8c9b0;
+    --texto: #2c1a0e;
+    --texto-suave: #8b7355;
+    --borde: rgba(44,26,14,.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--crema);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(245,239,228,.96);
+    border-bottom: 1px solid var(--borde);
+    padding: 0 8%;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--cafe);
+    display: flex; align-items: center; gap: .5rem;
+    text-decoration: none;
+  }
+  .nav-logo-punto { color: var(--tostado); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+  nav ul a {
+    color: var(--texto-suave); text-decoration: none;
+    font-size: .82rem; font-weight: 500;
+    letter-spacing: .5px; transition: color .2s;
+  }
+  nav ul a:hover { color: var(--cafe); }
+  .nav-pedido {
+    background: var(--cafe) !important;
+    color: var(--crema) !important;
+    padding: 8px 20px !important;
+    font-weight: 600 !important;
+    transition: background .2s !important;
+  }
+  .nav-pedido:hover { background: var(--cafe-medio) !important; }
+
+  /* HAMBURGUESA */
+  .hamburguesa {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 101;
+  }
+  .hamburguesa span {
+    display: block; width: 24px; height: 2px;
+    background: var(--cafe); transition: all .3s;
+  }
+  .hamburguesa.abierto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburguesa.abierto span:nth-child(2) { opacity: 0; }
+  .hamburguesa.abierto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* HERO */
+  #inicio {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 100px 8% 60px;
+    position: relative; overflow: hidden;
+    background: var(--crema);
+  }
+  .hero-bg-circulo {
+    position: absolute; right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,135,58,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-texto { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-size: .75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--tostado); margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 30px; height: 1px;
+    background: var(--tostado);
+  }
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700; line-height: 1.05;
+    color: var(--cafe); margin-bottom: 1.5rem;
+  }
+  .hero-h1 em { font-style: italic; color: var(--tostado); }
+  .hero-sub {
+    font-size: 1rem; color: var(--texto-suave);
+    line-height: 1.8; max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-botones { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-cafe {
+    display: inline-block;
+    background: var(--cafe);
+    color: var(--crema);
+    font-size: .88rem; font-weight: 600;
+    padding: 14px 30px; text-decoration: none;
+    transition: background .2s, transform .2s;
+    border-radius: 2px;
+  }
+  .btn-cafe:hover { background: var(--cafe-medio); transform: translateY(-2px); }
+  .btn-outline-cafe {
+    display: inline-block;
+    border: 1.5px solid var(--borde);
+    color: var(--cafe);
+    font-size: .88rem; font-weight: 500;
+    padding: 13px 30px; text-decoration: none;
+    transition: border-color .2s;
+    border-radius: 2px;
+  }
+  .btn-outline-cafe:hover { border-color: var(--cafe); }
+
+  /* HERO IMAGEN */
+  .hero-imagen {
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .hero-taza {
+    width: 340px; height: 400px;
+    background: var(--rosa-suave);
+    border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9rem;
+    position: relative;
+    animation: float 5s ease-in-out infinite;
+    box-shadow: 0 30px 60px rgba(44,26,14,.12);
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-16px) rotate(2deg); }
+  }
+  .hero-tag-flotante {
+    position: absolute; bottom: -20px; left: -20px;
+    background: var(--cafe);
+    color: var(--crema);
+    font-family: 'Playfair Display', serif;
+    font-size: .85rem; font-style: italic;
+    padding: 10px 18px;
+    border-radius: 2px;
+  }
+
+  /* SECCIONES */
+  section { padding: 90px 8%; }
+  .sec-eyebrow {
+    font-size: .72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--tostado); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .7rem;
+    font-weight: 500;
+  }
+  .sec-eyebrow::before { content: '—'; }
+  .sec-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700; color: var(--cafe);
+    margin-bottom: 1rem; line-height: 1.1;
+  }
+  .sec-h2 em { font-style: italic; color: var(--tostado); }
+  .sec-sub {
+    color: var(--texto-suave); font-size: .95rem;
+    line-height: 1.8; max-width: 500px;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ═══════════════════════════════
+     CARRUSEL ESTILO APPLE WATCH
+  ═══════════════════════════════ */
+  #menu { background: var(--cafe); overflow: hidden; }
+  #menu .sec-eyebrow { color: var(--rosa-suave); }
+  #menu .sec-h2 { color: var(--crema); }
+  #menu .sec-h2 em { color: var(--tostado); }
+  #menu .sec-sub { color: rgba(245,239,228,.6); }
+
+  .carrusel-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Fondo que cambia de color */
+  .carrusel-fondo {
+    position: absolute; inset: 0;
+    transition: background .6s ease;
+    border-radius: 24px;
+  }
+
+  .carrusel-track-outer {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex; align-items: center;
+  }
+
+  .carrusel-track {
+    display: flex;
+    transition: transform .6s cubic-bezier(.77,0,.175,1);
+    width: 100%;
+  }
+
+  .carrusel-slide {
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 4rem 5%;
+    gap: 3rem;
+    position: relative; z-index: 1;
+  }
+
+  .slide-imagen {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slide-producto-img {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem;
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    transition: transform .4s;
+    overflow: hidden;
+  }
+  .slide-producto-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .carrusel-slide:hover .slide-producto-img {
+    transform: scale(1.04);
+  }
+
+  .slide-info { color: var(--crema); }
+  .slide-categoria {
+    font-size: .72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(245,239,228,.6); margin-bottom: .8rem;
+    font-weight: 500;
+  }
+  .slide-nombre {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700; line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .slide-desc {
+    font-size: .95rem; line-height: 1.8;
+    color: rgba(245,239,228,.75);
+    margin-bottom: 1.5rem;
+    max-width: 360px;
+  }
+  .slide-precio {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--tostado); margin-bottom: 1.5rem;
+  }
+  .slide-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .slide-tag {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.15);
+    color: rgba(245,239,228,.8);
+    font-size: .72rem; padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: .5px;
+  }
+  .btn-pedir {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--crema);
+    color: var(--cafe);
+    font-size: .88rem; font-weight: 700;
+    padding: 13px 28px; text-decoration: none;
+    border-radius: 2px;
+    transition: background .2s, transform .2s;
+  }
+  .btn-pedir:hover { background: var(--rosa-suave); transform: translateY(-2px); }
+
+  /* Controles */
+  .carrusel-controles {
+    display: flex; align-items: center;
+    justify-content: center;
+    gap: 1.5rem; margin-top: 2.5rem;
+    position: relative; z-index: 2;
+  }
+  .carr-btn {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(245,239,228,.25);
+    background: transparent;
+    color: var(--crema);
+    font-size: 1.2rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, border-color .2s;
+  }
+  .carr-btn:hover {
+    background: rgba(245,239,228,.1);
+    border-color: rgba(245,239,228,.5);
+  }
+  .carr-dots { display: flex; gap: .5rem; }
+  .carr-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(245,239,228,.3);
+    cursor: pointer; transition: background .3s, transform .3s;
+    border: none;
+  }
+  .carr-dot.activo {
+    background: var(--crema);
+    transform: scale(1.3);
+  }
+  .carr-contador {
+    font-family: 'Playfair Display', serif;
+    font-size: .85rem; color: rgba(245,239,228,.5);
+    min-width: 50px; text-align: center;
+  }
+
+  /* GALERÍA */
+  #galeria { background: var(--crema); }
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 220px 220px;
+    gap: 8px;
+  }
+  .gal-item {
+    background: var(--rosa-suave);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem; overflow: hidden;
+    position: relative; cursor: pointer;
+    border-radius: 4px;
+  }
+  .gal-item.tall { grid-row: 1 / 3; font-size: 6rem; }
+  .gal-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s;
+  }
+  .gal-item:hover img { transform: scale(1.05); }
+  .gal-item::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(44,26,14,.4);
+    opacity: 0; transition: opacity .3s;
+    border-radius: 4px;
+  }
+  .gal-item:hover::after { opacity: 1; }
+
+  /* HORARIOS */
+  #horarios { background: var(--rosa-suave); }
+  .horarios-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
+  }
+  .horario-fila {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--borde);
+  }
+  .dia {
+    font-size: .88rem; font-weight: 500;
+    color: var(--texto-suave); text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .hora {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: var(--cafe);
+  }
+  .hora.cerrado { color: rgba(44,26,14,.3); font-style: italic; }
+  .horarios-extra {
+    background: var(--cafe);
+    color: var(--crema);
+    padding: 2rem;
+    border-radius: 4px;
+  }
+  .horarios-extra h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-style: italic;
+    margin-bottom: 1rem; color: var(--tostado);
+  }
+  .horarios-extra p {
+    font-size: .88rem; line-height: 1.8;
+    color: rgba(245,239,228,.75);
+    margin-bottom: 1.5rem;
+  }
+
+  /* UBICACIÓN */
+  #ubicacion { background: var(--crema); }
+  .ubic-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr;
+    gap: 3rem; align-items: start;
+  }
+  .mapa-box {
+    background: var(--rosa-suave);
+    height: 340px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    font-size: 3.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--borde);
+  }
+  .mapa-box p { font-size: .8rem; color: var(--texto-suave); letter-spacing: 2px; }
+  .info-contacto { display: flex; flex-direction: column; gap: 0; }
+  .info-fila {
+    display: flex; gap: 1rem; padding: 1.2rem 0;
+    border-bottom: 1px solid var(--borde);
+    align-items: flex-start;
+  }
+  .info-icono {
+    width: 38px; height: 38px;
+    background: var(--rosa-suave);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .info-key {
+    font-size: .7rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--texto-suave); display: block; margin-bottom: .2rem;
+  }
+  .info-val { font-size: .92rem; font-weight: 500; color: var(--cafe); }
+
+  /* WA FAB */
+  .wa-fab {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 58px; height: 58px;
+    background: #25d366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.7rem; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,.4);
+    z-index: 200; transition: transform .2s;
+    animation: wa-p 2.5s infinite;
+  }
+  .wa-fab:hover { transform: scale(1.1); }
+  @keyframes wa-p {
+    0%,100%{ box-shadow: 0 4px 20px rgba(37,211,102,.4) }
+    50%{ box-shadow: 0 4px 36px rgba(37,211,102,.65) }
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--cafe);
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 3rem 8%;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--crema);
+  }
+  .footer-logo span { color: var(--tostado); }
+  .footer-copy { color: rgba(245,239,228,.4); font-size: .78rem; }
+  .footer-credit {
+    color: rgba(245,239,228,.3); font-size: .72rem;
+    display: flex; align-items: center; gap: .4rem;
+  }
+  .footer-credit a { color: var(--tostado); text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    section { padding: 60px 6%; }
+    nav { padding: 0 6%; }
+    nav ul { display: none; }
+    nav ul.abierto {
+      display: flex;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(245,239,228,.98);
+      flex-direction: column;
+      padding: 2rem 6%; gap: 0;
+      border-bottom: 1px solid var(--borde);
+    }
+    nav ul li a {
+      display: block; padding: 1rem 0;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--borde);
+    }
+    .hamburguesa { display: flex; }
+
+    #inicio { grid-template-columns: 1fr; padding: 90px 6% 50px; }
+    .hero-imagen { display: none; }
+    .hero-h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+    .hero-botones { flex-direction: column; }
+    .btn-cafe, .btn-outline-cafe { width: 100%; text-align: center; }
+
+    .carrusel-slide {
+      grid-template-columns: 1fr;
+      padding: 2.5rem 6%;
+      gap: 2rem;
+    }
+    .slide-imagen { order: -1; }
+    .slide-producto-img { width: 200px; height: 200px; font-size: 5rem; }
+    .slide-nombre { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+
+    .galeria-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .gal-item { height: 160px; }
+    .gal-item.tall { grid-column: 1/3; height: 200px; grid-row: auto; }
+
+    .horarios-layout { grid-template-columns: 1fr; }
+    .ubic-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">Café <span class="nav-logo-punto">·</span> Raíz</a>
+  <ul id="navMenu">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#horarios">Horarios</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+    <li><a href="https://wa.me/5491100000000" class="nav-pedido">Hacer pedido</a></li>
+  </ul>
+  <div class="hamburguesa" id="hamburguesa" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-texto">
+    <div class="hero-eyebrow">Cafetería de barrio</div>
+    <h1 class="hero-h1">Café con<br><em>alma propia.</em></h1>
+    <p class="hero-sub">Granos seleccionados, recetas artesanales y el aroma de siempre. Un rincón donde cada taza cuenta una historia.</p>
+    <div class="hero-botones">
+      <a href="#menu" class="btn-cafe">Ver el menú</a>
+      <a href="https://wa.me/5491100000000" class="btn-outline-cafe">Hacer un pedido</a>
+    </div>
+  </div>
+  <div class="hero-imagen">
+    <div class="hero-bg-circulo"></div>
+    <div class="hero-taza">
+      ☕
+      <div class="hero-tag-flotante">Desde 1998</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENÚ CON CARRUSEL -->
+<section id="menu">
+  <div class="sec-eyebrow">Lo que preparamos</div>
+  <h2 class="sec-h2">Nuestro <em>menú</em></h2>
+  <p class="sec-sub">Cada producto está hecho con ingredientes frescos y mucho cuidado. Pasá el dedo o usá las flechas para explorar.</p>
+
+  <div class="carrusel-wrap">
+    <div class="carrusel-track-outer" id="carruselOuter">
+      <div class="carrusel-fondo" id="carruselFondo"></div>
+      <div class="carrusel-track" id="carruselTrack">
+
+        <!-- SLIDE 1 -->
+        <div class="carrusel-slide">
+          <div class="slide-imagen">
+            <div class="slide-producto-img"><img src="./img_cafeteria/cafe.png" alt="Café de especialidad"></div>
+          </div>
+          <div class="slide-info">
+            <div class="slide-categoria">Bebidas calientes</div>
+            <div class="slide-nombre">Café de especialidad</div>
+            <div class="slide-desc">Granos de origen único, tostado artesanal. Disponible en espresso, americano, cortado y más. Cada taza preparada al momento.</div>
+            <div class="slide-precio">Desde $1.200</div>
+            <div class="slide-tags">
+              <span class="slide-tag">Origen único</span>
+              <span class="slide-tag">Tostado propio</span>
+              <span class="slide-tag">Sin TACC disponible</span>
+            </div>
+            <a href="https://wa.me/5491100000000?text=Hola! Quiero pedir un café de especialidad" class="btn-pedir">☕ Pedir ahora</a>
+          </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="carrusel-slide">
+          <div class="slide-imagen">
+            <div class="slide-producto-img"><img src="./img_cafeteria/medialunas.png" alt="medialunas"></div>
+          </div>
+          <div class="slide-info">
+            <div class="slide-categoria">Panadería</div>
+            <div class="slide-nombre">Medialunas artesanales</div>
+            <div class="slide-desc">Masa hojaldrada, manteca de primera calidad. Recién horneadas cada mañana. También disponibles rellenas de dulce de leche.</div>
+            <div class="slide-precio">$800 la unidad</div>
+            <div class="slide-tags">
+              <span class="slide-tag">Horneadas al día</span>
+              <span class="slide-tag">Con manteca</span>
+              <span class="slide-tag">Rellenas disponibles</span>
+            </div>
+            <a href="https://wa.me/5491100000000?text=Hola! Quiero pedir medialunas" class="btn-pedir">🥐 Pedir ahora</a>
+          </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="carrusel-slide">
+          <div class="slide-imagen">
+            <div class="slide-producto-img"><img src="./img_cafeteria/tortas.png" alt="tortas"></div>
+          </div>
+          <div class="slide-info">
+            <div class="slide-categoria">Repostería</div>
+            <div class="slide-nombre">Tortas del día</div>
+            <div class="slide-desc">Preparadas en el local con recetas propias. Variedad que cambia según la temporada. Consultanos qué hay hoy disponible.</div>
+            <div class="slide-precio">Desde $2.500 la porción</div>
+            <div class="slide-tags">
+              <span class="slide-tag">Receta propia</span>
+              <span class="slide-tag">Cambia cada día</span>
+              <span class="slide-tag">Veganas disponibles</span>
+            </div>
+            <a href="https://wa.me/5491100000000?text=Hola! Quiero saber qué tortas tienen hoy" class="btn-pedir">🧁 Consultar hoy</a>
+          </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="carrusel-slide">
+          <div class="slide-imagen">
+            <div class="slide-producto-img"><img src="./img_cafeteria/bebidas.png" alt="Bebidas frías"></div>
+          </div>
+          <div class="slide-info">
+            <div class="slide-categoria">Bebidas frías</div>
+            <div class="slide-nombre">Cold brew & limonadas</div>
+            <div class="slide-desc">Cold brew macerado 18 horas. Limonadas naturales con fruta de estación. Opción de leche vegetal en todas las bebidas.</div>
+            <div class="slide-precio">Desde $1.500</div>
+            <div class="slide-tags">
+              <span class="slide-tag">18hs maceración</span>
+              <span class="slide-tag">Fruta natural</span>
+              <span class="slide-tag">Leche vegetal</span>
+            </div>
+            <a href="https://wa.me/5491100000000?text=Hola! Quiero pedir una bebida fría" class="btn-pedir">🥤 Pedir ahora</a>
+          </div>
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="carrusel-slide">
+          <div class="slide-imagen">
+            <div class="slide-producto-img"><img src="./img_cafeteria/tostados.png" alt="tostados"></div>
+          </div>
+          <div class="slide-info">
+            <div class="slide-categoria">Salado</div>
+            <div class="slide-nombre">Tostados & sándwiches</div>
+            <div class="slide-desc">Pan de masa madre, rellenos frescos y tostado al momento. Opciones vegetarianas y veganas disponibles todos los días.</div>
+            <div class="slide-precio">Desde $2.200</div>
+            <div class="slide-tags">
+              <span class="slide-tag">Masa madre</span>
+              <span class="slide-tag">Relleno fresco</span>
+              <span class="slide-tag">Opción vegana</span>
+            </div>
+            <a href="https://wa.me/5491100000000?text=Hola! Quiero pedir un sándwich" class="btn-pedir">🥪 Pedir ahora</a>
+          </div>
+        </div>
+
+      </div><!-- fin track -->
+    </div><!-- fin track-outer -->
+
+    <!-- CONTROLES -->
+    <div class="carrusel-controles">
+      <button class="carr-btn" id="btnPrev" aria-label="Anterior">←</button>
+      <div class="carr-dots" id="carrDots"></div>
+      <span class="carr-contador" id="carrContador">1 / 5</span>
+      <button class="carr-btn" id="btnNext" aria-label="Siguiente">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="sec-eyebrow">El local</div>
+  <h2 class="sec-h2">Nuestro <em>espacio</em></h2>
+  <div class="galeria-grid">
+    <div class="gal-item tall"><img src="./img_cafeteria/local_cafe.png" alt="local"></div>
+    <div class="gal-item"><img src="./img_cafeteria/medialunas.png" alt="medialunas"></div>
+    <div class="gal-item"><img src="./img_cafeteria/tortas.png" alt="tortas"></div>
+    <div class="gal-item"><img src="./img_cafeteria/bebidas.png" alt="Bebidas frías"></div>
+    <div class="gal-item"><img src="./img_cafeteria/cafe.png" alt="Café de especialidad"></div>
+  </div>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios">
+  <div class="sec-eyebrow">Cuándo estamos</div>
+  <h2 class="sec-h2">Horarios de <em>atención</em></h2>
+  <div class="horarios-layout">
+    <div>
+      <div class="horario-fila"><span class="dia">Lunes</span><span class="hora">7:00 — 20:00</span></div>
+      <div class="horario-fila"><span class="dia">Martes</span><span class="hora">7:00 — 20:00</span></div>
+      <div class="horario-fila"><span class="dia">Miércoles</span><span class="hora">7:00 — 20:00</span></div>
+      <div class="horario-fila"><span class="dia">Jueves</span><span class="hora">7:00 — 20:00</span></div>
+      <div class="horario-fila"><span class="dia">Viernes</span><span class="hora">7:00 — 21:00</span></div>
+      <div class="horario-fila"><span class="dia">Sábado</span><span class="hora">8:00 — 21:00</span></div>
+      <div class="horario-fila"><span class="dia">Domingo</span><span class="hora">9:00 — 18:00</span></div>
+    </div>
+    <div class="horarios-extra">
+      <h3>¿Querés reservar una mesa?</h3>
+      <p>Para grupos de 4 o más personas recomendamos reservar con anticipación, especialmente los fines de semana.</p>
+      <a href="https://wa.me/5491100000000?text=Hola! Quiero reservar una mesa" class="btn-cafe">Reservar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion">
+  <div class="sec-eyebrow">Dónde estamos</div>
+  <h2 class="sec-h2">Vení a <em>visitarnos</em></h2>
+  <div class="ubic-grid">
+    <div class="mapa-box">
+      🗺️
+      <p>Insertar Google Maps</p>
+    </div>
+    <div class="info-contacto">
+      <div class="info-fila">
+        <div class="info-icono">📍</div>
+        <div><span class="info-key">Dirección</span><span class="info-val">Rivadavia 1234, Flores<br>Buenos Aires</span></div>
+      </div>
+      <div class="info-fila">
+        <div class="info-icono">📞</div>
+        <div><span class="info-key">Teléfono</span><span class="info-val">011 4XXX-XXXX</span></div>
+      </div>
+      <div class="info-fila">
+        <div class="info-icono">💬</div>
+        <div><span class="info-key">WhatsApp</span><span class="info-val">11 XXXX-XXXX</span></div>
+      </div>
+      <div class="info-fila">
+        <div class="info-icono">📸</div>
+        <div><span class="info-key">Instagram</span><span class="info-val">@caferaiz</span></div>
+      </div>
+      <a href="https://wa.me/5491100000000" class="btn-cafe" style="margin-top:2rem;display:inline-block">💬 Escribinos</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Café <span>·</span> Raíz</div>
+  <div class="footer-copy">© 2025 Café Raíz · Buenos Aires</div>
+  <div class="footer-credit">Diseño web por <a href="../index.html">CodingToHeaven</a></div>
+</footer>
+
+<!-- WA FAB -->
+<a href="https://wa.me/5491100000000" class="wa-fab" target="_blank" title="Hacé tu pedido por WhatsApp">💬</a>
+
+<script>
+// ═══════════════════════════════
+// CARRUSEL
+// ═══════════════════════════════
+const slides = document.querySelectorAll('.carrusel-slide');
+const track = document.getElementById('carruselTrack');
+const fondo = document.getElementById('carruselFondo');
+const dots = document.getElementById('carrDots');
+const contador = document.getElementById('carrContador');
+const total = slides.length;
+let actual = 0;
+let startX = 0;
+let isDragging = false;
+
+// Colores de fondo por slide
+const colores = [
+  'linear-gradient(135deg, #3d1f0a 0%, #5c2d0e 100%)',
+  'linear-gradient(135deg, #2d1a08 0%, #7a4a1e 100%)',
+  'linear-gradient(135deg, #1a0d2e 0%, #4a2060 100%)',
+  'linear-gradient(135deg, #0a1f2e 0%, #1a4a5c 100%)',
+  'linear-gradient(135deg, #1a2e0a 0%, #3a5c1e 100%)',
+];
+
+// Crear dots
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'carr-dot' + (i === 0 ? ' activo' : '');
+  dot.setAttribute('aria-label', `Ir al producto ${i + 1}`);
+  dot.onclick = () => irA(i);
+  dots.appendChild(dot);
+});
+
+function irA(idx) {
+  actual = (idx + total) % total;
+  track.style.transform = `translateX(-${actual * 100}%)`;
+  fondo.style.background = colores[actual];
+  contador.textContent = `${actual + 1} / ${total}`;
+  document.querySelectorAll('.carr-dot').forEach((d, i) => {
+    d.classList.toggle('activo', i === actual);
+  });
+}
+
+// Inicializar fondo
+fondo.style.background = colores[0];
+
+// Botones
+document.getElementById('btnPrev').onclick = () => irA(actual - 1);
+document.getElementById('btnNext').onclick = () => irA(actual + 1);
+
+// Swipe touch
+const outer = document.getElementById('carruselOuter');
+outer.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+outer.addEventListener('touchend', e => {
+  const diff = startX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) irA(diff > 0 ? actual + 1 : actual - 1);
+});
+
+// Swipe mouse
+outer.addEventListener('mousedown', e => { startX = e.clientX; isDragging = true; });
+outer.addEventListener('mouseup', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  const diff = startX - e.clientX;
+  if (Math.abs(diff) > 50) irA(diff > 0 ? actual + 1 : actual - 1);
+});
+
+// Teclado
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') irA(actual - 1);
+  if (e.key === 'ArrowRight') irA(actual + 1);
+});
+
+// Auto-avance cada 6 segundos
+setInterval(() => irA(actual + 1), 6000);
+
+// ═══════════════════════════════
+// HAMBURGUESA
+// ═══════════════════════════════
+function toggleMenu() {
+  const menu = document.getElementById('navMenu');
+  const btn = document.getElementById('hamburguesa');
+  menu.classList.toggle('abierto');
+  btn.classList.toggle('abierto');
+}
+document.querySelectorAll('#navMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navMenu').classList.remove('abierto');
+    document.getElementById('hamburguesa').classList.remove('abierto');
+  });
+});
+</script>
+
+</body>
+</html>
